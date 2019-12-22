@@ -1,0 +1,40 @@
+Package: flair
+Title: flair: Highlight, annotate, and format your R source code
+Version: 0.0.2
+Authors@R: 
+    c(person(given = "Kelly",
+             family = "Bodwin",
+             role = c("aut", "cre"),
+             email = "kelly@bodwin.us"),
+      person(given = "Hunter",
+             family = "Glanz",
+             role = "aut"))
+Description: flair facilitates easier formatting of R
+    source code in a R Markdown-based presentation. The main goal of the
+    package is to allow users to preserve their code creation process
+    within code chunks, then to specifiy formatting details for the source
+    code, such as highlighting of particular syntatical elements.
+License: MIT + file LICENSE
+URL: https://github.com/kbodwin/flair
+BugReports: https://github.com/kbodwin/flair/issues
+Imports:
+    diffobj,
+    evaluate,
+    ggplot2,
+    glue,
+    knitr,
+    magrittr,
+    purrr,
+    stringr
+Suggests: 
+    dplyr,
+    learnr,
+    rmarkdown,
+    rstudioapi,
+    shiny,
+    testthat (>= 2.1.0)
+VignetteBuilder: 
+    knitr
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.1

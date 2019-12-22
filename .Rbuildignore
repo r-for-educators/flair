@@ -1,0 +1,10 @@
+^flair\.Rproj$
+^\.Rproj\.user$
+^dev
+^old_R
+^LICENSE\.md$
+^dev$
+^doc$
+^Meta$
+docs/
+^README\.Rmd$

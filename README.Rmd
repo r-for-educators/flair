@@ -1,0 +1,75 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+options(tibble.print_min = 5, tibble.print_max = 5)
+```
+
+# demoR
+
+<!-- badges: start
+[![CRAN status](https://www.r-pkg.org/badges/version/demoR)](https://cran.r-project.org/package=demoR)-->
+
+
+## Overview
+
+demoR is a set of tools for formatting `R` code for presentations, teaching demonstrations, and much more:
+
+* The `demo_*()` functions prepare your source code to be both evaluated and displayed by `knitr::knit()`.
+
+* The `hlt_*()` functions add text display formatting to printed code.
+
+These combine naturally within code chunks in R Markdown files via code chunk options. You can learn more about them in `vignette("demoR")`.
+
+## Installation
+
+<!--
+```{r, eval = FALSE}
+# The easiest way to get demoR is the basic installation:
+install.packages("demoR")
+```
+Not on CRAN yet!
+-->
+
+### Development version
+
+Currently, only the development version of demoR is available.  You can install this by running
+
+```{r, eval = FALSE}
+# install.packages("devtools")
+devtools::install_github("kbodwin/demoR")
+```
+
+
+## Usage
+
+```{r, message = FALSE}
+library(demoR)
+data(iris)
+codestring <- "mean(iris$Sepal.Length, na.rm = TRUE)"
+
+hlt_funs(codestring)
+
+hlt_args(codestring)
+
+demo_code(codestring) %>% hlt_args()
+```
+
+## Getting help
+
+If you encounter a clear bug, please file a minimal reproducible example on [github](https://github.com/kbodwin/demoR/issues). 
+
+<!-- This doesn't apply to us, right?
+For questions and other discussion, please use [community.rstudio.com](https://community.rstudio.com/), or the [manipulatr mailing list](https://groups.google.com/group/manipulatr). -->
+
+---
+
