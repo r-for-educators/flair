@@ -1,4 +1,4 @@
 library(testthat)
-library(demoR)
+library(flair)
 
-test_check("demoR")
+test_check("flair")

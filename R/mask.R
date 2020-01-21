@@ -15,6 +15,6 @@ mask <- function(.string, pattern, ...) {
 #' @export
 mask_regexp <- function(.string, pattern, ...) {
 
-  hlt_regexp(.string, pattern, color = "transparent", ...)
+  flair_rx(.string, pattern, color = "transparent", ...)
 
 }

@@ -18,5 +18,15 @@ wrap_html <- function(x, opts_list){
 
 }
 
+#' weird way to get formatting wrappers
+#' \code{knitr_wrap} returns the output of knitr:::wrap
+#'
+#' @param x evaluated input to wrap
+knitr_wrap <- function(x) {
 
-### put wrap latex here when ready
+  options <- knitr::opts_chunk$get()
+
+  knitr::engine_output(options,
+                       out = x)
+
+}

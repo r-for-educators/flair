@@ -1,23 +1,26 @@
-#' Builds a \code{\link{flair_code}} object from a code chunk
+#' Builds a \code{\link{decorate_code}} object from a code chunk
 #'
 #' This function reads the source code from a given named code chunk; i.e., \code{{r chunk_name, echo = FALSE}}.
 #'
-#' When run directly in a source file, \code{flair_chunk()} reads the text of the active file and extracts the relevant string of source code from the chosen chunk.  (Important: this only works in RStudio.)
+#' When run directly in a source file, \code{decorate_chunk()} reads the text of the active file and extracts the relevant string of source code from the chosen chunk.  (Important: this only works in RStudio.)
 #'
-#' When run during the \code{knitr::knit()} process, \code{flair_chunk()} pulls the relevant chunk source during \code{knitr::knit_hooks$set("source").}
+#' When run during the \code{knitr::knit()} process, \code{decorate_chunk()} pulls the relevant chunk source during \code{knitr::knit_hooks$set("source").}
 #'
-#' @param chunk_name String that gives the name of the chunk. If left blank, current chunk is used.
+#' @param chunk_name The label name of the chunk we plan to add \code{\link{flair}} to.
 #'
-#' @return An object of class \code{\link{flair_code}}
+#' @return An object of class \code{\link{decorate_code}}
 #'
-#' @importFrom stringr str_c str_trim
+#' @importFrom stringr str_c str_trim str_remove_all
 #'
 #' @export
-flair_chunk <- function(chunk_name) {
+decorate_chunk <- function(chunk_name,
+                        eval = TRUE) {
 
     sources = NULL
 
     try_chunk <- purrr::safely(knitr::knit_code$get)(chunk_name)
+
+    ## To do: get chunk options here and use those instead.
 
     if (is.null(try_chunk$error) && !is.null(try_chunk$result)) {
 
@@ -25,8 +28,8 @@ flair_chunk <- function(chunk_name) {
         str_c(collapse = "\n") %>%
         str_trim()
 
-      new_flair_code <- flair_code(sources)
-      attr(new_flair_code, "origin") <- "chunk-knit"
+      new_deco <- decorate_code(sources, eval)
+      attr(new_deco, "origin") <- "chunk-knit"
 
     } else if (requireNamespace("rstudioapi", quietly = TRUE) && rstudioapi::isAvailable()) {
 
@@ -39,8 +42,8 @@ flair_chunk <- function(chunk_name) {
             ed <- rstudioapi::getSourceEditorContext()
             sources <- ed$contents
 
-            new_flair_code <- flair_code(code_from_editor(sources, chunk_name))
-            attr(new_flair_code, "origin") <- "chunk-active"
+            new_deco <- decorate_code(code_from_editor(sources, chunk_name), eval)
+            attr(new_deco, "origin") <- "chunk-active"
           }
 
     }
@@ -51,7 +54,7 @@ flair_chunk <- function(chunk_name) {
 
     }
 
-  return(new_flair_code)
+  return(new_deco)
 
 }
 

@@ -18,7 +18,6 @@ License: MIT + file LICENSE
 URL: https://github.com/kbodwin/flair
 BugReports: https://github.com/kbodwin/flair/issues
 Imports:
-    diffobj,
     evaluate,
     ggplot2,
     glue,
