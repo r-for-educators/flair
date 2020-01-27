@@ -1,4 +1,4 @@
-#' Builds a \code{\link{decorate_code}} object from a code chunk
+#' Builds a \code{\link{with_flair}} object from a code chunk
 #'
 #' This function reads the source code from a given named code chunk; i.e., \code{{r chunk_name, echo = FALSE}}.
 #'
@@ -7,54 +7,121 @@
 #' When run during the \code{knitr::knit()} process, \code{decorate_chunk()} pulls the relevant chunk source during \code{knitr::knit_hooks$set("source").}
 #'
 #' @param chunk_name The label name of the chunk we plan to add \code{\link{flair}} to.
+#' @param eval Evaluation options for chunk; behaves identically to ordinary \code{knitr} code chunk option \code{eval}
+#' @param echo Evaluation options for chunk; behaves identically to ordinary \code{knitr} code chunk option \code{echo}
 #'
-#' @return An object of class \code{\link{decorate_code}}
+#' @return An object of class \code{\link{with_flair}}
 #'
 #' @importFrom stringr str_c str_trim str_remove_all
 #'
 #' @export
 decorate_chunk <- function(chunk_name,
-                        eval = TRUE) {
+                        eval = TRUE,
+                        echo = TRUE) {
 
-    sources = NULL
+    my_code <- NULL
+
+    is_live <- FALSE
 
     try_chunk <- purrr::safely(knitr::knit_code$get)(chunk_name)
 
-    ## To do: get chunk options here and use those instead.
 
     if (is.null(try_chunk$error) && !is.null(try_chunk$result)) {
 
-      sources <- try_chunk$result %>%
-        str_c(collapse = "\n") %>%
-        str_trim()
+      my_code <- str_c(try_chunk$result, collapse = "\n")
 
-      new_deco <- decorate_code(sources, eval)
-      attr(new_deco, "origin") <- "chunk-knit"
+      my_opts <- knitr::opts_chunk$merge(attr(try_chunk$result, "chunk_opts"))
+
 
     } else if (requireNamespace("rstudioapi", quietly = TRUE) && rstudioapi::isAvailable()) {
 
-          editorIsOpen <- tryCatch({
-            rstudioapi::getSourceEditorContext()
-            TRUE
-          }, error = function(e) FALSE)
+      editorIsOpen <- tryCatch({
+        rstudioapi::getSourceEditorContext()
+        TRUE
+      }, error = function(e) FALSE)
 
-          if (editorIsOpen) {
-            ed <- rstudioapi::getSourceEditorContext()
-            sources <- ed$contents
+      if (editorIsOpen) {
+        ed <- rstudioapi::getSourceEditorContext()
+        sources <- ed$contents
 
-            new_deco <- decorate_code(code_from_editor(sources, chunk_name), eval)
-            attr(new_deco, "origin") <- "chunk-active"
-          }
+        my_opts <- knitr::opts_chunk$get()  ### fix this! ###
 
-    }
+        my_code <- code_from_editor(sources, chunk_name)
 
-    if (is.null(sources)) {
+        is_live <- TRUE
+
+      } #if editor open
+
+    } # chunk or editor
+
+
+    if (is.null(my_code)) {
 
       stop(paste0("Error: No chunk found with name '", chunk_name, "'"))
 
     }
 
-  return(new_deco)
+
+  # Check for flair = FALSE option
+  if (!is.null(my_opts$flair) && !my_opts$flair) {
+
+    placeholder <- list(NULL)
+    attr(placeholder, "class") = "with_flair"
+
+    return(placeholder)
+
+  } else {
+
+    # Replace OG chunk options with flairing options
+    my_opts[["eval"]] <- eval
+    my_opts[["echo"]] <- echo
+
+    my_code <- paste0("```{r}", my_code, "```")
+
+    # knit just the chunk of interest
+    if (is_live) {
+
+      knitted <- knitr::knit(text = my_code,
+                             quiet = TRUE)
+
+    } else {
+
+      knitted <- knitr::knit_child(text = my_code,
+                                 options = my_opts,
+                                 quiet = TRUE)
+
+    }
+
+    # convert knitted string to a list with sources separate from output
+    knitted <- knitted %>% src_to_list()
+
+    attr(knitted, "class") <- "with_flair"
+
+  }
+
+
+  return(knitted)
+
+}
+
+
+
+#' Takes plain text of knitted code and converts it to a list, in which code sources have the class \code{source}.
+
+#' @export
+src_to_list <- function(knitted) {
+
+  knitted <- knitted %>%
+    split_sandwiches("```r?") %>%
+    as.list()
+
+  before_code <- which(knitted == "```r")
+
+  knitted[before_code + 1] <- purrr::map(knitted[before_code + 1], function(x) structure(list(src = x), class = "source"))
+
+  knitted <- knitted[-c(before_code, before_code + 2)]
+
+  return(knitted)
 
 }
 
@@ -92,8 +159,7 @@ code_from_editor <- function(.contents, chunk_name) {
     min() + start_chunk
 
   chunk_text <- .contents[(start_chunk+1):(end_chunk-1)] %>%
-    str_c(collapse = "\n") %>%
-    str_trim()
+    str_c(collapse = "\n")
 
   attributes(chunk_text) <- NULL
 

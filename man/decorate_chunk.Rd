@@ -2,15 +2,19 @@
 % Please edit documentation in R/decorate_chunk.R
 \name{decorate_chunk}
 \alias{decorate_chunk}
-\title{Builds a \code{\link{decorate_code}} object from a code chunk}
+\title{Builds a \code{\link{with_flair}} object from a code chunk}
 \usage{
-decorate_chunk(chunk_name, eval = TRUE)
+decorate_chunk(chunk_name, eval = TRUE, echo = TRUE)
 }
 \arguments{
 \item{chunk_name}{The label name of the chunk we plan to add \code{\link{flair}} to.}
+
+\item{eval}{Evaluation options for chunk; behaves identically to ordinary \code{knitr} code chunk option \code{eval}}
+
+\item{echo}{Evaluation options for chunk; behaves identically to ordinary \code{knitr} code chunk option \code{echo}}
 }
 \value{
-An object of class \code{\link{decorate_code}}
+An object of class \code{\link{with_flair}}
 }
 \description{
 This function reads the source code from a given named code chunk; i.e., \code{{r chunk_name, echo = FALSE}}.

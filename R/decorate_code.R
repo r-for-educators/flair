@@ -60,54 +60,55 @@ decorate_code <- function(text, eval = TRUE, collapse = FALSE) {
     map(my_deco_code[is_src],
         ~quietly(scope_and_run)(.x))
 
-}
-
-# unlist sources and drop classes
-
-my_deco_code[is_src] <- my_deco_code[is_src] %>%
-  unlist()
+  }
 
 
-attributes(my_deco_code) <- NULL
+  # unlist sources and drop classes
 
-#### Shatter code into segments ####
-
-if (collapse) {
-
-  my_deco_code <- c(text,
-                     my_deco_code[!is_src])
-
-  attr(my_deco_code, "where_sources") <- 1
-
-} else {
+   my_deco_code[is_src] <- my_deco_code[is_src] %>%
+     unlist()
 
 
-  attr(my_deco_code, "where_sources") <- which(is_src)
+  attributes(my_deco_code) <- NULL
 
-}
+  #### Shatter code into segments ####
 
-#### Assign class and attributes ####
+  if (collapse) {
+
+    my_deco_code <- c(text,
+                       my_deco_code[!is_src])
+
+    attr(my_deco_code, "where_sources") <- 1
+
+  } else {
 
 
-attr(my_deco_code, "class") <- "decorate_code"
+    attr(my_deco_code, "where_sources") <- which(is_src)
 
-#attr(my_deco_code, "origin") <- "direct_string"
+  }
 
-attr(my_deco_code, "eval") <- eval
+  #### Assign class and attributes ####
 
-get_doc_type <- purrr::safely(rmarkdown::all_output_formats)(knitr::current_input())
 
-if (!is.null(get_doc_type$error)) {
+  attr(my_deco_code, "class") <- "decorate_code"
 
-  attr(my_deco_code, "doc_type") <- "active_source"
+  #attr(my_deco_code, "origin") <- "direct_string"
 
-} else {
+  attr(my_deco_code, "eval") <- eval
 
-  attr(my_deco_code, "doc_type") <- get_doc_type$result
+  get_doc_type <- purrr::safely(rmarkdown::all_output_formats)(knitr::current_input())
 
-}
+  if (!is.null(get_doc_type$error)) {
 
-return(my_deco_code)
+    attr(my_deco_code, "doc_type") <- "active_source"
+
+  } else {
+
+    attr(my_deco_code, "doc_type") <- get_doc_type$result
+
+  }
+
+  return(my_deco_code)
 
 }
 
@@ -124,7 +125,7 @@ knit_print.decorate_code <- function(x, ...) {
 
   where_sources <- attr(x, "where_sources")
 
-  x[-where_sources] <- purrr::map(x[-where_sources], function(val) knitr:::wrap(val, ...))
+  x[-where_sources] <- purrr::map(x[-where_sources], function(val) knitr_wrap(val, ...))
 
   x[where_sources] <- purrr::map(x[where_sources], function(val) wrap_source(val, attr(x, "doc_type"), ...))
 

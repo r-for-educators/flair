@@ -27,7 +27,7 @@ flair_rx <- function(x, pattern, ...)  {
   UseMethod("flair_rx")
 }
 
-#' S3 method for \code{\link{decorate_code}} objects
+#' S3 method for \code{\link{with_flair}} objects
 #'
 #' Applies flair to the \code{print_string} attribute.
 #'
@@ -38,13 +38,15 @@ flair_rx <- function(x, pattern, ...)  {
 #' @importFrom purrr map
 #'
 #' @export
-flair_rx.decorate_code = function(x, pattern, code = TRUE, ...) {
+flair_rx.with_flair = function(x, pattern, code = TRUE, ...) {
 
-  where_sources <- attr(x, "where_sources")
+  where_sources <-  map(x, ~attr(.x, "class")) == "source"
 
   source_strings <- purrr::map(x[where_sources], function(cs) flair_rx(cs, pattern, code, ...))
 
   x[where_sources] <- source_strings
+
+  x[where_sources] <- purrr::map(x[where_sources], function(x) structure(list(src = x), class = "source"))
 
   return(x)
 
@@ -79,6 +81,7 @@ flair_rx.default <- function(x, pattern, code = TRUE, ...) {
 
   return(x)
 }
+
 
 #' @rdname flair
 #' @export

@@ -5,7 +5,7 @@
 \title{weird way to get formatting wrappers
 \code{knitr_wrap} returns the output of knitr:::wrap}
 \usage{
-knitr_wrap(x)
+knitr_wrap(x, ...)
 }
 \arguments{
 \item{x}{evaluated input to wrap}
