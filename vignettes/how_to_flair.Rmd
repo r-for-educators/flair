@@ -49,9 +49,9 @@ Without `flair`, your approach might be to type your code into your code chunk, 
 
 In this vignette, we will show you how to use the `flair` package to add decorative formatting to your source code.
 
-## `decorate_code` Objects
+## `with_flair` Objects
 
-The core element of the package is an object of the class `decorate_code`.  These objects contain both the natural output of your R code and information to let `knitr` know how display the source code.
+The core element of the package is an object of the class `with_flair`.  These objects contain both the natural output of your R code and your flaired-up source code.
 
 
 ### Decorating a code chunk
@@ -159,7 +159,8 @@ For the most part, we do not recommend this option, as it is more difficult to p
 However, this option is particularly nice if you want to show "bad" code that cannot normally be evaluated.  For example:
 
 ```{r, error = TRUE}
-decorate('mean(1:10') %>%
+decorate('mean(1:10',
+         error = TRUE) %>%
   flair("(")
 ```
 
@@ -258,9 +259,9 @@ foo + 5
 
 A word of caution: Make sure you define your objects in your code string, not outside the `decorate()` function!  For example, the following approach has two problems:
 
-1. `foo` contains the `decorate_code` object itself, rather than the result of the R code `mean(1:10)`, so  `foo + 5` throws an error.
+1. `foo` contains the output object itself, rather than the result of the R code `mean(1:10)`, so  `foo + 5` throws an error.
 
-2. The `decorate_code` output object is being assigned to `foo` rather than printed, so no highlighted code is included in the knitted output.
+2. The output object of `decorate` is being assigned to `foo` rather than printed, so no highlighted code is included in the knitted output.
 
 ```{r, error = TRUE}
 foo <- decorate('mean(1:10)') %>% 
