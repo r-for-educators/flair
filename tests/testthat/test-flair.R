@@ -18,7 +18,7 @@ test_that("flair_rx works with dots", {
 })
 
 
-test_that("flair_rx works for decorated code", {
+test_that("flair_rx works for with_flair object", {
 
   good_str = "ggplot(iris, aes(x = <span style='color:red;font-size:30px'>Sepal.Length</span>)) + geom_histogram()"
 
@@ -27,5 +27,5 @@ test_that("flair_rx works for decorated code", {
   test_result <- flair_rx(test_dc, test_regexp, color = "red", size = "30px")
 
   expect_equal(test_result[[1]], good_str)
-  expect_equal(class(test_result), "decorate_code")
+  expect_equal(class(test_result), "with_flair")
 })

@@ -103,7 +103,7 @@ print.with_flair <- function(x, ...) {
 
   x <- x[where_sources]
 
-  x <- map(x, function(src) wrap_source(src, doc_type = "unknown", ...))
+  x <- map(x, function(src) prep_source(src, doc_type = "unknown", ...))
 
   x <- stringr::str_c(unlist(x), collapse = "</br>")
 

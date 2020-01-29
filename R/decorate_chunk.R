@@ -9,6 +9,9 @@
 #' @param chunk_name The label name of the chunk we plan to add \code{\link{flair}} to.
 #' @param eval Evaluation options for chunk; behaves identically to ordinary \code{knitr} code chunk option \code{eval}
 #' @param echo Evaluation options for chunk; behaves identically to ordinary \code{knitr} code chunk option \code{echo}
+#' @param include Evaluation options for chunk; behaves identically to ordinary \code{knitr} code chunk option \code{include}
+#'
+#' @param ...  Any number of other chunk options to override.
 #'
 #' @return An object of class \code{\link{with_flair}}
 #'
@@ -17,7 +20,9 @@
 #' @export
 decorate_chunk <- function(chunk_name,
                         eval = TRUE,
-                        echo = TRUE) {
+                        echo = TRUE,
+                        include = TRUE,
+                        ...) {
 
     my_code <- NULL
 
@@ -72,10 +77,6 @@ decorate_chunk <- function(chunk_name,
 
   } else {
 
-    # Replace OG chunk options with flairing options
-    my_opts[["eval"]] <- eval
-    my_opts[["echo"]] <- echo
-
     my_code <- paste0("```{r}\n", my_code, "\n```")
 
     # knit just the chunk of interest
@@ -85,6 +86,20 @@ decorate_chunk <- function(chunk_name,
                              quiet = TRUE)
 
     } else {
+
+      # Replace OG chunk options with flairing options
+      my_opts[["eval"]] <- eval
+      my_opts[["echo"]] <- echo
+      my_opts[["include"]] <- include
+
+      # Combine with dots
+      new_opts <- list(...)
+
+      if (length(new_opts) > 0) {
+
+        my_opts <- c(my_opts[!(names(my_opts) %in% names(new_opts))], new_opts)
+
+      }
 
       knitted <- knitr::knit_child(text = my_code,
                                  options = my_opts,
@@ -116,6 +131,8 @@ src_to_list <- function(knitted) {
     as.list()
 
   before_code <- which(knitted == "```r")
+
+  knitted[before_code + 1] <- stringr::str_trim(knitted[before_code + 1])
 
   knitted[before_code + 1] <- purrr::map(knitted[before_code + 1], function(x) structure(list(src = x), class = "source"))
 

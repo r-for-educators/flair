@@ -2,35 +2,30 @@
 % Please edit documentation in R/decorate_code.R
 \name{decorate_code}
 \alias{decorate_code}
-\title{Creates an object of the class \code{decorate_code}}
+\title{Creates an object of the class \code{with_flair}}
 \usage{
-decorate_code(text, eval = TRUE, collapse = FALSE)
+decorate_code(text, ...)
 }
 \arguments{
 \item{text}{A string, presumably representing R code.}
 
-\item{eval}{A boolean specifying whether the code should be immediately evaluated, in addition to creating the \code{decorate_code} object. (Defaults to \code{TRUE})}
-
-\item{collapse}{Should the source code be printed in one block, before the output is printed? (Defaults to \code{FALSE})}
+\item{...}{Any number of default chunk options to override.}
 }
 \value{
-A \code{decorate_code} object.
+A \code{with_flair} object.
 }
 \description{
-\code{decorate_code} objects are evaluated R code, returned from \code{evaluate::evaluate}, with an attached attribute called \code{print_string} which sets up fancy formatting for knitting.
+Creates an object of the class \code{with_flair}
 }
 \examples{
 
-# When run in console, this will print only the results of mean(1:10)
+# When run in console, this will print the results of mean(1:10)
 my_code <- decorate_code(text = 'mean(1:10)') \%>\% flair_funs()
 
-# The decorate_code object itself has no output
+# The object itself, when printed, previews your code with flair
 
 my_code
 
-# However, it comes with an attribute with the decorated source code.
-
-attr(my_code, "print_string")
 
 # Objects defined by decorate_code are created in the current environment for later use.
 

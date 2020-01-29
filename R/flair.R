@@ -52,7 +52,7 @@ flair_rx.with_flair = function(x, pattern,
 
   x[where_sources] <- purrr::map(x[where_sources], function(x) structure(list(src = x), class = "source"))
 
-  x <- c(x, script)
+  #x <- c(x, script)
 
   attr(x, "class") <- "with_flair"
 
@@ -89,7 +89,7 @@ flair_rx.default <- function(x, pattern,
     unlist() %>%
     str_c(collapse = "")
 
-  x <- paste0(x, "\n", script)
+  #x <- paste0(x, "\n", script)
 
   return(x)
 }
