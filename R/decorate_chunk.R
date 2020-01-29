@@ -76,7 +76,7 @@ decorate_chunk <- function(chunk_name,
     my_opts[["eval"]] <- eval
     my_opts[["echo"]] <- echo
 
-    my_code <- paste0("```{r}", my_code, "```")
+    my_code <- paste0("```{r}\n", my_code, "\n```")
 
     # knit just the chunk of interest
     if (is_live) {

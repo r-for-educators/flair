@@ -21,7 +21,7 @@ knit_print.with_flair <- function(x, ...) {
 
   where_sources <- map(x, ~attr(.x, "class")) == "source"
 
-  x[where_sources] <- map(x[where_sources], function(src) wrap_source(src, doc_type, ...))
+  x[where_sources] <- map(x[where_sources], function(src) prep_source(src, doc_type, ...))
 
   x <- stringr::str_c(unlist(x), collapse = "\n")
 
@@ -33,9 +33,10 @@ knit_print.with_flair <- function(x, ...) {
 }
 
 #' Helper for \code{knit_print.with_flair}
-wrap_source <- function(x, doc_type, ...) {
+prep_source <- function(x, doc_type, ...) {
 
-  #### reformat line breaks ####
+  x <- stringr::str_trim(x) %>%
+    stringr::str_replace_all("(?<=\\s) ", "&nbsp;")
 
   if (doc_type == "pdf_document") {
 

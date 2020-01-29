@@ -23,7 +23,9 @@
 #' @rdname flair
 #'
 #' @export
-flair_rx <- function(x, pattern, ...)  {
+flair_rx <- function(x, pattern,
+                     before = NULL, after = NULL,
+                     script = NULL, ...)  {
   UseMethod("flair_rx")
 }
 
@@ -38,15 +40,21 @@ flair_rx <- function(x, pattern, ...)  {
 #' @importFrom purrr map
 #'
 #' @export
-flair_rx.with_flair = function(x, pattern, code = TRUE, ...) {
+flair_rx.with_flair = function(x, pattern,
+                               before = NULL, after = NULL,
+                               script = NULL, ...) {
 
   where_sources <-  map(x, ~attr(.x, "class")) == "source"
 
-  source_strings <- purrr::map(x[where_sources], function(cs) flair_rx(cs, pattern, code, ...))
+  source_strings <- purrr::map(x[where_sources], function(cs) flair_rx(cs, pattern, before = before, after = after, ...))
 
   x[where_sources] <- source_strings
 
   x[where_sources] <- purrr::map(x[where_sources], function(x) structure(list(src = x), class = "source"))
+
+  x <- c(x, script)
+
+  attr(x, "class") <- "with_flair"
 
   return(x)
 
@@ -54,7 +62,9 @@ flair_rx.with_flair = function(x, pattern, code = TRUE, ...) {
 
 #' Default S3 method for \code{\link{flair_rx}}.
 #' @export
-flair_rx.default <- function(x, pattern, code = TRUE, ...) {
+flair_rx.default <- function(x, pattern,
+                             before = NULL, after = NULL,
+                             script = NULL, ...) {
   ## Matches regular expression of pattern inside of code string
   ## Use fixed() to match exact string
 
@@ -75,9 +85,11 @@ flair_rx.default <- function(x, pattern, code = TRUE, ...) {
 
   which_tags <- split_string %>% str_detect("\\<[^\\-]") %>% unlist()
 
-  x <- purrr::map_if(split_string, !which_tags, function(x) flair_quick(x, pattern, ...)) %>%
+  x <- purrr::map_if(split_string, !which_tags, function(x) flair_quick(x, pattern, before = before, after = after, ...)) %>%
     unlist() %>%
     str_c(collapse = "")
+
+  x <- paste0(x, "\n", script)
 
   return(x)
 }
@@ -85,16 +97,30 @@ flair_rx.default <- function(x, pattern, code = TRUE, ...) {
 
 #' @rdname flair
 #' @export
-flair_quick <- function(x, pattern, ...){
+flair_quick <- function(x, pattern,
+                        before = NULL, after = NULL,
+                        ...){
 
-  if (length(list(...)) == 0) {
-    x <- x %>% str_replace_all(pattern, txt_background)
-  } else {
+  my_styles <- list(...)
+
+  if (!is.null(before) & !is.null(after)) {
+
+    x <- x %>% str_replace_all(pattern, function(x) txt_tag(x, before, after))
+
+  } else if (length(my_styles) == 0) {
+
+    x <- x %>% str_replace_all(pattern, function(x) txt_background(x))
+
+  }
+
+
+  if (length(my_styles) != 0) {
     x <- x %>% str_replace_all(pattern, function(x) txt_style(x, ...))
   }
 
   return(x)
 }
+
 
 #' @rdname flair
 #' @export

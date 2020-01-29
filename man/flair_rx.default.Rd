@@ -4,7 +4,7 @@
 \alias{flair_rx.default}
 \title{Default S3 method for \code{\link{flair_rx}}.}
 \usage{
-\method{flair_rx}{default}(x, pattern, code = TRUE, ...)
+\method{flair_rx}{default}(x, pattern, before = NULL, after = NULL, script = NULL, ...)
 }
 \description{
 Default S3 method for \code{\link{flair_rx}}.

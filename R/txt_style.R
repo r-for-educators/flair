@@ -32,8 +32,10 @@
 #' txt_tocode("I am code.")
 #'
 #' @export
-txt_style <- function(x, type = "html",
-                      bold = FALSE, underline = FALSE, italics = FALSE, ...) {
+txt_style <- function(x,
+                      type = "html",
+                      bold = FALSE, underline = FALSE, italics = FALSE,
+                      ...) {
 
   # Dots to list
   my_opts <- list(...)
@@ -41,29 +43,32 @@ txt_style <- function(x, type = "html",
   # If html to correct <span> options
   if (type == "html") {
 
+    if (length(my_opts) != 0) {
 
-    # replacements to pass to str_replace
-    opts_to_html = c("^size" = "font-size",
-                     "font$" = "font-family",
-                     "^style" = "font-style",
-                     "background$" = "background-color")
+      # replacements to pass to str_replace
+      opts_to_html = c("^size" = "font-size",
+                       "font$" = "font-family",
+                       "^style" = "font-style",
+                       "background$" = "background-color")
 
-    names(my_opts) <- names(my_opts) %>%
-      str_replace(fixed("_"), "-") %>%
-      str_replace_all(opts_to_html)
-
-
-    # check for bold, italics, underline
-
-    if (bold) { my_opts <- c(my_opts, "bold" = "text-weight") }
-
-    if (italics) { my_opts <- c(my_opts, "italics" = "text-style") }
-
-    if (underline) { my_opts <- c(my_opts, "underline" = "text-decoration") }
+      names(my_opts) <- names(my_opts) %>%
+        str_replace(fixed("_"), "-") %>%
+        str_replace_all(opts_to_html)
 
 
-    # put all options into <span>
-    x <- wrap_html(x, my_opts)
+      # check for bold, italics, underline
+
+      if (bold) { my_opts <- c(my_opts, "bold" = "text-weight") }
+
+      if (italics) { my_opts <- c(my_opts, "italics" = "text-style") }
+
+      if (underline) { my_opts <- c(my_opts, "underline" = "text-decoration") }
+
+
+      # put all options into <span>
+      x <- wrap_html(x, my_opts)
+
+    } #if options exist
 
   }
 
@@ -139,5 +144,12 @@ txt_ul <- function(x) {
 txt_tocode <- function(x){
 
   paste0("<code>", x, "</code>")
+
+}
+
+#' @export
+txt_tag <- function(x, before, after){
+
+  paste0(before, x, after)
 
 }

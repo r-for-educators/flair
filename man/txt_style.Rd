@@ -13,8 +13,14 @@
 \alias{txt_tocode}
 \title{Wraps text in html or latex code for formatting}
 \usage{
-txt_style(x, type = "html", bold = FALSE, underline = FALSE,
-  italics = FALSE, ...)
+txt_style(
+  x,
+  type = "html",
+  bold = FALSE,
+  underline = FALSE,
+  italics = FALSE,
+  ...
+)
 
 txt_color(x, color = "red")
 

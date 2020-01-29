@@ -3,7 +3,6 @@
 \docType{package}
 \name{flair}
 \alias{flair}
-\alias{flair-package}
 \alias{flair_rx}
 \alias{flair_quick}
 \alias{flair_all}
@@ -12,9 +11,9 @@
 \alias{flair_input_vals}
 \title{flair: A package for adding flair to your displayed source code.}
 \usage{
-flair_rx(x, pattern, ...)
+flair_rx(x, pattern, before = NULL, after = NULL, script = NULL, ...)
 
-flair_quick(x, pattern, ...)
+flair_quick(x, pattern, before = NULL, after = NULL, ...)
 
 flair(x, pattern, ...)
 

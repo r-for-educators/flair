@@ -4,7 +4,7 @@
 \alias{flair_rx.with_flair}
 \title{S3 method for \code{\link{with_flair}} objects}
 \usage{
-\method{flair_rx}{with_flair}(x, pattern, code = TRUE, ...)
+\method{flair_rx}{with_flair}(x, pattern, before = NULL, after = NULL, script = NULL, ...)
 }
 \arguments{
 \item{x}{An object of class \code{\link{decorate_code}}.}
