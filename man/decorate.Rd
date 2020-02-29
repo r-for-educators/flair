@@ -2,24 +2,19 @@
 % Please edit documentation in R/decorate.R
 \name{decorate}
 \alias{decorate}
-\title{Builds a \code{\link{decorate_code}} object from either a code chunk or a string object containing source code.}
+\title{Builds a \code{\link{with_flair}} object from either a code chunk or a string object containing source code.}
 \usage{
-decorate(x, eval = TRUE, collapse = FALSE)
+decorate(x, ...)
 }
 \arguments{
 \item{x}{A string, containing either a chunk label or R code.}
 
-\item{eval}{Should this be immediately evaluated, in addition to creating the \code{decorate_code} object? (Defaults to \code{TRUE})}
-
-\item{collapse}{Should the source code be printed in one block, before the output is printed? (Defaults to \code{FALSE})}
+\item{...}{Chunk options to pass along}
 }
 \value{
-A \code{decorate_code} object.
+A \code{with_flair} object.
 }
 \description{
-\code{decorate_code} objects are evaluated R code, returned from \code{evaluate::evaluate}, with an attached attribute called \code{print_string} which sets up fancy formatting for knitting.
-}
-\details{
 \code{decorate} does its best to guess if it has been given a code string or a chunk name, based on the presence of special characters.
 }
 \seealso{

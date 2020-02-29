@@ -6,6 +6,8 @@
 \alias{flair_rx}
 \alias{flair_quick}
 \alias{flair_all}
+\alias{flair_all.default}
+\alias{flair_all.with_flair}
 \alias{flair_args}
 \alias{flair_funs}
 \alias{flair_input_vals}
@@ -18,6 +20,10 @@ flair_quick(x, pattern, before = NULL, after = NULL, ...)
 flair(x, pattern, ...)
 
 flair_all(x, ...)
+
+\method{flair_all}{default}(x, ...)
+
+\method{flair_all}{with_flair}(x, ...)
 
 flair_args(x, ...)
 

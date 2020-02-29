@@ -57,16 +57,16 @@ decorate_code <- function(text, ...) {
 
   } else {
 
-    my_code <- paste0("```{r}\n", text, "\n```")
+    my_code_fenced <- paste0("```{r}\n", text, "\n```")
 
     if (is_live) {
 
-      knitted <- knitr::knit(text = my_code,
+      knitted <- knitr::knit(text = my_code_fenced,
                              quiet = TRUE)
 
     } else {
 
-      knitted <- knitr::knit_child(text = my_code,
+      knitted <- knitr::knit_child(text = my_code_fenced,
                                    options = my_opts,
                                    quiet = TRUE)
     }
@@ -75,6 +75,8 @@ decorate_code <- function(text, ...) {
     knitted <- knitted %>% src_to_list()
 
     attr(knitted, "class") <- "with_flair"
+
+    attr(knitted, "orig_code_text") <- text
 
     return(knitted)
 

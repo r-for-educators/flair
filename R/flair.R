@@ -31,11 +31,11 @@ flair_rx <- function(x, pattern,
 
 #' S3 method for \code{\link{with_flair}} objects
 #'
-#' Applies flair to the \code{print_string} attribute.
+#' Applies flair to the source code.
 #'
-#' @param x An object of class \code{\link{decorate_code}}.
+#' @param x An object of class \code{\link{with_flair}}.
 #'
-#' @return An object of class \code{\link{decorate_code}}.
+#' @return An object of class \code{\link{with_flair}}.
 #'
 #' @importFrom purrr map
 #'
@@ -134,7 +134,35 @@ flair <- function(x, pattern, ...) {
 #' @export
 flair_all <- function(x, ...) {
 
-  flair_rx(x, ".+", ...)
+  UseMethod("flair_all")
+
+}
+
+#' @rdname flair
+#' @export
+flair_all.default <- function(x, ...) {
+
+  flair_quick(x, ".+", ...)
+
+}
+
+#' @rdname flair
+#' @export
+flair_all.with_flair <- function(x, ...) {
+
+  where_sources <-  map(x, ~attr(.x, "class")) == "source"
+
+  source_strings <- purrr::map(x[where_sources], function(cs) flair_quick(cs, ".+", ...))
+
+  x[where_sources] <- source_strings
+
+  x[where_sources] <- purrr::map(x[where_sources], function(x) structure(list(src = x), class = "source"))
+
+  #x <- c(x, script)
+
+  attr(x, "class") <- "with_flair"
+
+  return(x)
 
 }
 
@@ -185,13 +213,4 @@ flair_input_vals <- function(x, ...) {
     flair_rx(vars_regexp2, ...)
 }
 
-#' #' @rdname flair
-#' #' @export
-#' flair_lines <- function(x, lines, ...) {
-#'
-#'   x_split <- split_sandwiches(x, "(\\n|\\<br\\>)+")
-#'
-#'   lines <- lines
-#'
-#'
-#' }
+
