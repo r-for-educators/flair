@@ -2,10 +2,17 @@
 % Please edit documentation in R/with_flair.R
 \name{print.with_flair}
 \alias{print.with_flair}
-\title{No printing for u}
+\title{When printed in console, a \code{with_flair} object should preview the
+flaired source code in the viewer pane.}
 \usage{
 \method{print}{with_flair}(x, ...)
 }
+\arguments{
+\item{x}{A \code{with_flair} object.}
+
+\item{...}{Other \code{print} options}
+}
 \description{
-No printing for u
+When printed in console, a \code{with_flair} object should preview the
+flaired source code in the viewer pane.
 }

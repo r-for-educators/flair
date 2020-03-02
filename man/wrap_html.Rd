@@ -4,7 +4,7 @@
 \alias{wrap_html}
 \title{Wraps text in html for formatting}
 \usage{
-wrap_html(x, opts_list)
+wrap_html(x, opts_list, type = "html")
 }
 \arguments{
 \item{x}{The string to be wrapped}

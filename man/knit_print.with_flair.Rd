@@ -6,6 +6,11 @@
 \usage{
 knit_print.with_flair(x, ...)
 }
+\arguments{
+\item{x}{A \code{with_flair} object.}
+
+\item{...}{Other \code{knit_print} options}
+}
 \description{
 S3 method for knitting a \code{with_flair} object
 }

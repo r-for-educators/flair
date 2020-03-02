@@ -20,6 +20,7 @@ flair_lines <- function(x, lines, ...) {
 
 }
 
+#' @rdname flair_lines
 #' @export
 flair_lines.default <- function(x, lines, ...) {
 
@@ -39,6 +40,8 @@ flair_lines.default <- function(x, lines, ...) {
 #' Applies flair to the appropriate line(s) of source code.
 #'
 #' @param x An object of class \code{\link{with_flair}}.
+#' @param lines An integer vector specifying code lines to highlight.
+#' @param ... Formatting style options, passed to \code{\link{txt_style}}
 #'
 #' @return An object of class \code{\link{with_flair}}.
 #'
@@ -76,9 +79,9 @@ flair_lines.with_flair <- function(x, lines, ...) {
 
 #' Helper for \code{flair_lines}
 #'
-#' @param text
-#' @param nums
-#' @param lines
+#' @param text Text from knitted source code
+#' @param nums List of overall lines contained
+#' @param lines Which lines to highlight
 #'
 #' @importFrom stringr str_split str_c
 flair_sublines <- function(text, nums, lines, ...) {

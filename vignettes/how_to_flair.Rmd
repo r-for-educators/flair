@@ -8,10 +8,10 @@ vignette: >
 ---
 
 ```{r, include = FALSE}
-# knitr::opts_chunk$set(
-#   collapse = TRUE,
-#   comment = "#>"
-# )
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
 ```
 
 
@@ -19,7 +19,6 @@ vignette: >
 library(flair)
 library(dplyr)
 library(ggplot2)
-library(stringr)
 ```
 
 ## Introduction
@@ -206,6 +205,20 @@ decorate('how_to_pipe') %>%
   flair("Sepal.Length", background = "pink") %>%
   flair("Species", color = "CornflowerBlue")
 ```
+
+### flair_lines
+
+If you only need to highlight certain lines of your code, you can do so:
+
+```{r}
+decorate('how_to_pipe') %>%
+  flair_lines(2:3)
+```
+
+**Important Notes:**
+
+1. Unlike the `echo` option in R Markdown chunks, `flair_lines` only counts lines with code content, not whitespace.  
+2. As of now, `flair_lines` only works with the default yellow-background highlighting.  (Sorry!)
 
 ### flair_rx
 

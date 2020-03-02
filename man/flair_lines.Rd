@@ -2,9 +2,12 @@
 % Please edit documentation in R/flair_lines.R
 \name{flair_lines}
 \alias{flair_lines}
+\alias{flair_lines.default}
 \title{Adds decorative formatting (flair) to parts of a string or source code, specified by line(s).}
 \usage{
 flair_lines(x, lines, ...)
+
+\method{flair_lines}{default}(x, lines, ...)
 }
 \arguments{
 \item{x}{A string object}

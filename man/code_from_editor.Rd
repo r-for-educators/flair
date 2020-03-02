@@ -7,7 +7,9 @@
 code_from_editor(.contents, chunk_name)
 }
 \arguments{
-\item{.contents}{}
+\item{.contents}{chunk contents passed from editor context}
+
+\item{chunk_name}{label of chunk}
 }
 \value{
 chunk text

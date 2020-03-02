@@ -36,6 +36,10 @@ flair_input_vals(x, ...)
 
 \item{pattern}{A pattern to match.  By default, this is a fixed pattern; use \code{flair_rx} for regular expressions.}
 
+\item{before}{String giving specific html tags to insert before matched text.}
+
+\item{after}{String giving specific html tags to insert after matched text.}
+
 \item{...}{Formatting style options, passed to \code{\link{txt_style}}}
 }
 \value{
@@ -59,7 +63,7 @@ The \code{decorate} functions execute source code and simultaneously prepare it 
 }
 
 \examples{
-
+\dontrun{
 code_string <- "foo <- mean(1:10, na.rm = TRUE)"
 
 code_string \%>\% flair("foo")
@@ -67,5 +71,6 @@ code_string \%>\% flair("foo")
 code_string \%>\% flair_args()
 
 code_string \%>\% flair_funs(color = "red")
+}
 
 }

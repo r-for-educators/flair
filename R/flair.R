@@ -4,12 +4,14 @@
 #'
 #' @param x A string object
 #' @param pattern A pattern to match.  By default, this is a fixed pattern; use \code{flair_rx} for regular expressions.
+#' @param before String giving specific html tags to insert before matched text.
+#' @param after String giving specific html tags to insert after matched text.
 #' @param ... Formatting style options, passed to \code{\link{txt_style}}
 #'
 #' @return A string with formatting wrappers.
 #'
 #' @examples
-#'
+#' \dontrun{
 #' code_string <- "foo <- mean(1:10, na.rm = TRUE)"
 #'
 #' code_string %>% flair("foo")
@@ -17,6 +19,7 @@
 #' code_string %>% flair_args()
 #'
 #' code_string %>% flair_funs(color = "red")
+#' }
 #'
 #' @import stringr
 #'
@@ -42,7 +45,7 @@ flair_rx <- function(x, pattern,
 #' @export
 flair_rx.with_flair = function(x, pattern,
                                before = NULL, after = NULL,
-                               script = NULL, ...) {
+                               ...) {
 
   where_sources <-  map(x, ~attr(.x, "class")) == "source"
 
@@ -51,8 +54,6 @@ flair_rx.with_flair = function(x, pattern,
   x[where_sources] <- source_strings
 
   x[where_sources] <- purrr::map(x[where_sources], function(x) structure(list(src = x), class = "source"))
-
-  #x <- c(x, script)
 
   attr(x, "class") <- "with_flair"
 
@@ -64,7 +65,7 @@ flair_rx.with_flair = function(x, pattern,
 #' @export
 flair_rx.default <- function(x, pattern,
                              before = NULL, after = NULL,
-                             script = NULL, ...) {
+                              ...) {
   ## Matches regular expression of pattern inside of code string
   ## Use fixed() to match exact string
 
@@ -88,8 +89,6 @@ flair_rx.default <- function(x, pattern,
   x <- purrr::map_if(split_string, !which_tags, function(x) flair_quick(x, pattern, before = before, after = after, ...)) %>%
     unlist() %>%
     str_c(collapse = "")
-
-  #x <- paste0(x, "\n", script)
 
   return(x)
 }
@@ -157,8 +156,6 @@ flair_all.with_flair <- function(x, ...) {
   x[where_sources] <- source_strings
 
   x[where_sources] <- purrr::map(x[where_sources], function(x) structure(list(src = x), class = "source"))
-
-  #x <- c(x, script)
 
   attr(x, "class") <- "with_flair"
 

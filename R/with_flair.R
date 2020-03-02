@@ -1,6 +1,22 @@
+#' Create a \code{with_flair} object
+#'
+#' (The preferred function is \code{\link{decorate}})
+#'
+#' @param x A text object or code chunk label
+#'
+#' @returns An object of class \code{with_flair}
+#'
+#' @export
+with_flair <- function(x) {
 
+  decorate(x)
+
+}
 
 #' S3 method for knitting a \code{with_flair} object
+#'
+#' @param x A \code{with_flair} object.
+#' @param ... Other \code{knit_print} options
 #'
 #' @importFrom purrr map
 #'
@@ -21,19 +37,22 @@ knit_print.with_flair <- function(x, ...) {
 
   where_sources <- map(x, ~attr(.x, "class")) == "source"
 
-  x[where_sources] <- map(x[where_sources], function(src) prep_source(src, doc_type, ...))
+  x[where_sources] <- map(x[where_sources], function(src) prep_source(src, doc_type))
 
   x <- stringr::str_c(unlist(x), collapse = "\n")
 
 
   knitr::asis_output(x)
 
-  #knitr::knit_print(unclass(x))
-
 }
 
 #' Helper for \code{knit_print.with_flair}
-prep_source <- function(x, doc_type, ...) {
+#' @param x Text of source code.
+#' @param doc_type Document type to knit to.
+#'
+#' @returns Properly wrapped text.
+#'
+prep_source <- function(x, doc_type) {
 
   x <- stringr::str_trim(x) %>%
     stringr::str_replace_all("(?<=\\s) ", "&nbsp;")
@@ -91,7 +110,12 @@ prep_source <- function(x, doc_type, ...) {
 }
 
 
-#' No printing for u
+#' When printed in console, a \code{with_flair} object should preview the
+#' flaired source code in the viewer pane.
+#'
+#' @param x A \code{with_flair} object.
+#' @param ... Other \code{print} options
+#'
 #' @export
 print.with_flair <- function(x, ...) {
 
@@ -103,7 +127,7 @@ print.with_flair <- function(x, ...) {
 
   x <- x[where_sources]
 
-  x <- map(x, function(src) prep_source(src, doc_type = "unknown", ...))
+  x <- map(x, function(src) prep_source(src, doc_type = "unknown"))
 
   x <- stringr::str_c(unlist(x), collapse = "</br>")
 

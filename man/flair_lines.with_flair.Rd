@@ -8,6 +8,10 @@
 }
 \arguments{
 \item{x}{An object of class \code{\link{with_flair}}.}
+
+\item{lines}{An integer vector specifying code lines to highlight.}
+
+\item{...}{Formatting style options, passed to \code{\link{txt_style}}}
 }
 \value{
 An object of class \code{\link{with_flair}}.

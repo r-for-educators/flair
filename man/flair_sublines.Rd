@@ -7,7 +7,11 @@
 flair_sublines(text, nums, lines, ...)
 }
 \arguments{
-\item{lines}{}
+\item{text}{Text from knitted source code}
+
+\item{nums}{List of overall lines contained}
+
+\item{lines}{Which lines to highlight}
 }
 \description{
 Helper for \code{flair_lines}
