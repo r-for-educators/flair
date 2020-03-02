@@ -1,15 +1,22 @@
 #' Builds a \code{\link{with_flair}} object from a code chunk
 #'
-#' This function reads the source code from a given named code chunk; i.e., \code{{r chunk_name, echo = FALSE}}.
+#' This function reads the source code from a given named code chunk;
+#' i.e., \code{{r chunk_name, echo = FALSE}}.
 #'
-#' When run directly in a source file, \code{decorate_chunk()} reads the text of the active file and extracts the relevant string of source code from the chosen chunk.  (Important: this only works in RStudio.)
+#' When run directly in a source file, \code{decorate_chunk()} reads the text of
+#' the active file and extracts the relevant string of source code from the chosen chunk.
+#' (Important: this only works in RStudio.)
 #'
-#' When run during the \code{knitr::knit()} process, \code{decorate_chunk()} pulls the relevant chunk source during \code{knitr::knit_hooks$set("source").}
+#' When run during the \code{knitr::knit()} process, \code{decorate_chunk()}
+#' pulls the relevant chunk source during \code{knitr::knit_hooks$set("source").}
 #'
 #' @param chunk_name The label name of the chunk we plan to add \code{\link{flair}} to.
-#' @param eval Evaluation options for chunk; behaves identically to ordinary \code{knitr} code chunk option \code{eval}
-#' @param echo Evaluation options for chunk; behaves identically to ordinary \code{knitr} code chunk option \code{echo}
-#' @param include Evaluation options for chunk; behaves identically to ordinary \code{knitr} code chunk option \code{include}
+#' @param eval Evaluation options for chunk;
+#' behaves identically to ordinary \code{knitr} code chunk option \code{eval}
+#' @param echo Evaluation options for chunk;
+#' behaves identically to ordinary \code{knitr} code chunk option \code{echo}
+#' @param include Evaluation options for chunk;
+#' behaves identically to ordinary \code{knitr} code chunk option \code{include}
 #'
 #' @param ...  Any number of other chunk options to override.
 #'
@@ -125,8 +132,11 @@ decorate_chunk <- function(chunk_name,
 
 
 
-#' Takes plain text of knitted code and converts it to a list, in which code sources have the class \code{source}.
-
+#' Takes plain text of knitted code and converts it to a list, in which code
+#' sources have the class \code{source}.
+#'
+#' @param knitted Text of knitted code
+#'
 #' @export
 src_to_list <- function(knitted) {
 
@@ -138,7 +148,8 @@ src_to_list <- function(knitted) {
 
   knitted[before_code + 1] <- stringr::str_trim(knitted[before_code + 1])
 
-  knitted[before_code + 1] <- purrr::map(knitted[before_code + 1], function(x) structure(list(src = x), class = "source"))
+  knitted[before_code + 1] <- purrr::map(knitted[before_code + 1],
+                                         function(x) structure(list(src = x), class = "source"))
 
   knitted <- knitted[-c(before_code, before_code + 2)]
 
@@ -148,7 +159,9 @@ src_to_list <- function(knitted) {
 
 #' Converts raw editor text to a string of code
 #'
-#' Raw editor text has been taken from an active RStudio session via \code{rstudioapi::getSourceEditorContext()}.  Chunk delimiters and html is removed, all formatting is otherwise perserved.
+#' Raw editor text has been taken from an active RStudio session via
+#' \code{rstudioapi::getSourceEditorContext()}.  Chunk delimiters and html is
+#' removed, all formatting is otherwise perserved.
 #'
 #' @param .contents chunk contents passed from editor context
 #' @param chunk_name label of chunk

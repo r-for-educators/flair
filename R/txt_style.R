@@ -1,21 +1,26 @@
 #' Wraps text in html or latex code for formatting
 #'
-#' \code{txt_style} adds appropriate html style wrappers to a string. Any number of options can be specified, as long as they match html CSS tags names.
+#' \code{txt_style} adds appropriate html style wrappers to a string.
+#' Any number of options can be specified, as long as they match html CSS tags names.
 #'
 #' \code{txt_*} are shortcuts for specific individual style options
 #'
-#' Warning: These are simple direct wrappers for strings only.  If you are using \code{with_flair} objects, you should instead use the \code{\link{flair}} functions.
+#' Warning: These are simple direct wrappers for strings only.  If you are using
+#' \code{\link{with_flair}} objects, you should instead use the
+#' \code{\link{flair}} functions.
 #'
 #' @param x The string to be wrapped
-#' @param type The style of display, defaults to "html"  (currently nothing else is supported, sorry)
+#' @param type The style of display, defaults to "html"
+#' (currently nothing else is supported, sorry)
 #' @param bold Should the text be bolded?
 #' @param underline Should the text be underlined?
 #' @param italics Should the text be italicized?
-#' @param ... various display options: any html CSS \code{style} options, or one of \code{font}, \code{size}, \code{color}, \code{background}, \code{style}.
+#' @param ... various display options: any html CSS \code{style} options, or one
+#' of \code{font}, \code{size}, \code{color}, \code{background}, \code{style}.
 #'
 #' @return A string containing \code{x} with html wrappers.
 #'
-#' @seealso \code{\link{highlight}}
+#' @seealso \code{\link{flair}}
 #'
 #' @importFrom stringr str_c str_replace
 #'
@@ -99,7 +104,7 @@ txt_size <- function(x, size = "large"){
   txt_style(x, size = size)
 }
 
-#' @param colour Named or html hex color for text background.
+#' @param bg_color Named or html hex color for text background.
 #' @export
 #' @rdname txt_style
 txt_background <- function(x, bg_color = "#ffff7f"){

@@ -14,13 +14,13 @@
 #' my_code <- decorate_code(text = 'mean(1:10)') %>% flair_funs()
 #'
 #' # The object itself, when printed, previews your code with flair
-#'
+#'\dontrun{
 #' my_code
-#'
+#' }
 #'
 #' # Objects defined by decorate_code are created in the current environment for later use.
 #'
-#' decorate_code('foo <- mean(1:10)')
+#' my_code <- decorate_code('foo <- mean(1:10)')
 #'
 #' foo + 5
 #'

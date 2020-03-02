@@ -2,10 +2,15 @@
 % Please edit documentation in R/decorate_chunk.R
 \name{src_to_list}
 \alias{src_to_list}
-\title{Takes plain text of knitted code and converts it to a list, in which code sources have the class \code{source}.}
+\title{Takes plain text of knitted code and converts it to a list, in which code
+sources have the class \code{source}.}
 \usage{
 src_to_list(knitted)
 }
+\arguments{
+\item{knitted}{Text of knitted code}
+}
 \description{
-Takes plain text of knitted code and converts it to a list, in which code sources have the class \code{source}.
+Takes plain text of knitted code and converts it to a list, in which code
+sources have the class \code{source}.
 }

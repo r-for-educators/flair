@@ -9,11 +9,14 @@ decorate_chunk(chunk_name, eval = TRUE, echo = TRUE, include = TRUE, ...)
 \arguments{
 \item{chunk_name}{The label name of the chunk we plan to add \code{\link{flair}} to.}
 
-\item{eval}{Evaluation options for chunk; behaves identically to ordinary \code{knitr} code chunk option \code{eval}}
+\item{eval}{Evaluation options for chunk;
+behaves identically to ordinary \code{knitr} code chunk option \code{eval}}
 
-\item{echo}{Evaluation options for chunk; behaves identically to ordinary \code{knitr} code chunk option \code{echo}}
+\item{echo}{Evaluation options for chunk;
+behaves identically to ordinary \code{knitr} code chunk option \code{echo}}
 
-\item{include}{Evaluation options for chunk; behaves identically to ordinary \code{knitr} code chunk option \code{include}}
+\item{include}{Evaluation options for chunk;
+behaves identically to ordinary \code{knitr} code chunk option \code{include}}
 
 \item{...}{Any number of other chunk options to override.}
 }
@@ -21,10 +24,14 @@ decorate_chunk(chunk_name, eval = TRUE, echo = TRUE, include = TRUE, ...)
 An object of class \code{\link{with_flair}}
 }
 \description{
-This function reads the source code from a given named code chunk; i.e., \code{{r chunk_name, echo = FALSE}}.
+This function reads the source code from a given named code chunk;
+i.e., \code{{r chunk_name, echo = FALSE}}.
 }
 \details{
-When run directly in a source file, \code{decorate_chunk()} reads the text of the active file and extracts the relevant string of source code from the chosen chunk.  (Important: this only works in RStudio.)
+When run directly in a source file, \code{decorate_chunk()} reads the text of
+the active file and extracts the relevant string of source code from the chosen chunk.
+(Important: this only works in RStudio.)
 
-When run during the \code{knitr::knit()} process, \code{decorate_chunk()} pulls the relevant chunk source during \code{knitr::knit_hooks$set("source").}
+When run during the \code{knitr::knit()} process, \code{decorate_chunk()}
+pulls the relevant chunk source during \code{knitr::knit_hooks$set("source").}
 }

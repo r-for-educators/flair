@@ -20,6 +20,7 @@ BugReports: https://github.com/kbodwin/flair/issues
 Imports:
     dplyr,
     evaluate,
+    ggplot2,
     glue,
     knitr,
     magrittr,

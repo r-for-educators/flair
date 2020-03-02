@@ -3,24 +3,25 @@
 \name{flair_lines}
 \alias{flair_lines}
 \alias{flair_lines.default}
-\title{Adds decorative formatting (flair) to parts of a string or source code, specified by line(s).}
+\title{Adds decorative formatting (flair) to parts of a string or source code,
+specified by line(s).}
 \usage{
-flair_lines(x, lines, ...)
+flair_lines(x, lines)
 
-\method{flair_lines}{default}(x, lines, ...)
+\method{flair_lines}{default}(x, lines)
 }
 \arguments{
-\item{x}{A string object}
+\item{x}{A string or \code{\link{with_flair}} object}
 
 \item{lines}{Integer vector indicating which lines to apply the flair styling to.}
-
-\item{...}{Formatting style options, passed to \code{\link{txt_style}}}
 }
 \value{
 A string with formatting wrappers.
 }
 \description{
-\code{flair_lines} returns a string with formatting wrappers (currently only html)
+\code{flair_lines} returns a string with formatting wrappers(currently only
+html), or applies the formatting to the source elements of a
+\code{\link{with_flair}} object.
 }
 \examples{
 

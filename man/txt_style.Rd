@@ -46,7 +46,8 @@ txt_tag(x, before, after)
 \arguments{
 \item{x}{The string to be wrapped}
 
-\item{type}{The style of display, defaults to "html"  (currently nothing else is supported, sorry)}
+\item{type}{The style of display, defaults to "html"
+(currently nothing else is supported, sorry)}
 
 \item{bold}{Should the text be bolded?}
 
@@ -54,13 +55,16 @@ txt_tag(x, before, after)
 
 \item{italics}{Should the text be italicized?}
 
-\item{...}{various display options: any html CSS \code{style} options, or one of \code{font}, \code{size}, \code{color}, \code{background}, \code{style}.}
+\item{...}{various display options: any html CSS \code{style} options, or one
+of \code{font}, \code{size}, \code{color}, \code{background}, \code{style}.}
 
 \item{color}{Named or html hex color for font.}
 
-\item{colour}{Named or html hex color for text background.}
+\item{colour}{Named or html hex color for font.}
 
 \item{size}{Font size}
+
+\item{bg_color}{Named or html hex color for text background.}
 
 \item{font}{A valid font family.}
 
@@ -72,12 +76,15 @@ txt_tag(x, before, after)
 A string containing \code{x} with html wrappers.
 }
 \description{
-\code{txt_style} adds appropriate html style wrappers to a string. Any number of options can be specified, as long as they match html CSS tags names.
+\code{txt_style} adds appropriate html style wrappers to a string.
+Any number of options can be specified, as long as they match html CSS tags names.
 }
 \details{
 \code{txt_*} are shortcuts for specific individual style options
 
-Warning: These are simple direct wrappers for strings only.  If you are using \code{with_flair} objects, you should instead use the \code{\link{flair}} functions.
+Warning: These are simple direct wrappers for strings only.  If you are using
+\code{\link{with_flair}} objects, you should instead use the
+\code{\link{flair}} functions.
 }
 \examples{
 # General use
@@ -93,5 +100,5 @@ txt_tocode("I am code.")
 
 }
 \seealso{
-\code{\link{highlight}}
+\code{\link{flair}}
 }

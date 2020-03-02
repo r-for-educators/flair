@@ -15,5 +15,7 @@ code_from_editor(.contents, chunk_name)
 chunk text
 }
 \description{
-Raw editor text has been taken from an active RStudio session via \code{rstudioapi::getSourceEditorContext()}.  Chunk delimiters and html is removed, all formatting is otherwise perserved.
+Raw editor text has been taken from an active RStudio session via
+\code{rstudioapi::getSourceEditorContext()}.  Chunk delimiters and html is
+removed, all formatting is otherwise perserved.
 }

@@ -4,7 +4,7 @@
 \alias{flair_sublines}
 \title{Helper for \code{flair_lines}}
 \usage{
-flair_sublines(text, nums, lines, ...)
+flair_sublines(text, nums, lines)
 }
 \arguments{
 \item{text}{Text from knitted source code}

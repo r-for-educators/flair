@@ -4,14 +4,12 @@
 \alias{flair_lines.with_flair}
 \title{S3 method for \code{\link{with_flair}} objects}
 \usage{
-\method{flair_lines}{with_flair}(x, lines, ...)
+\method{flair_lines}{with_flair}(x, lines)
 }
 \arguments{
 \item{x}{An object of class \code{\link{with_flair}}.}
 
 \item{lines}{An integer vector specifying code lines to highlight.}
-
-\item{...}{Formatting style options, passed to \code{\link{txt_style}}}
 }
 \value{
 An object of class \code{\link{with_flair}}.

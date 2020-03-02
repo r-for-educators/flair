@@ -13,7 +13,7 @@
 \alias{flair_input_vals}
 \title{flair: A package for adding flair to your displayed source code.}
 \usage{
-flair_rx(x, pattern, before = NULL, after = NULL, script = NULL, ...)
+flair_rx(x, pattern, before = NULL, after = NULL, ...)
 
 flair_quick(x, pattern, before = NULL, after = NULL, ...)
 
@@ -34,7 +34,8 @@ flair_input_vals(x, ...)
 \arguments{
 \item{x}{A string object}
 
-\item{pattern}{A pattern to match.  By default, this is a fixed pattern; use \code{flair_rx} for regular expressions.}
+\item{pattern}{A pattern to match.  By default, this is a fixed pattern;
+use \code{flair_rx} for regular expressions.}
 
 \item{before}{String giving specific html tags to insert before matched text.}
 
@@ -59,7 +60,8 @@ The \code{flair_*} functions add decorative formatting to source code.
 \section{Decorate functions}{
 
 
-The \code{decorate} functions execute source code and simultaneously prepare it to have flair added, to display when knitted.
+The \code{decorate} functions execute source code and simultaneously prepare
+it to have flair added, to display when knitted.
 }
 
 \examples{

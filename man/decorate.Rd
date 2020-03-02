@@ -2,7 +2,8 @@
 % Please edit documentation in R/decorate.R
 \name{decorate}
 \alias{decorate}
-\title{Builds a \code{\link{with_flair}} object from either a code chunk or a string object containing source code.}
+\title{Builds a \code{\link{with_flair}} object from either a code chunk or a
+string object containing source code.}
 \usage{
 decorate(x, ...)
 }
@@ -15,7 +16,8 @@ decorate(x, ...)
 A \code{with_flair} object.
 }
 \description{
-\code{decorate} does its best to guess if it has been given a code string or a chunk name, based on the presence of special characters.
+\code{decorate} does its best to guess if it has been given a code string or
+a chunk name, based on the presence of special characters.
 }
 \seealso{
 \code{\link{decorate_chunk}}, \code{\link{decorate_code}}

@@ -8,6 +8,15 @@
 }
 \arguments{
 \item{x}{An object of class \code{\link{with_flair}}.}
+
+\item{pattern}{A pattern to match.  By default, this is a fixed pattern;
+use \code{flair_rx} for regular expressions.}
+
+\item{before}{String giving specific html tags to insert before matched text.}
+
+\item{after}{String giving specific html tags to insert after matched text.}
+
+\item{...}{Formatting style options, passed to \code{\link{txt_style}}}
 }
 \value{
 An object of class \code{\link{with_flair}}.

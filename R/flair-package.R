@@ -8,7 +8,8 @@
 #'
 #' @section Decorate functions:
 #'
-#' The \code{decorate} functions execute source code and simultaneously prepare it to have flair added, to display when knitted.
+#' The \code{decorate} functions execute source code and simultaneously prepare
+#' it to have flair added, to display when knitted.
 #'
 #' @docType package
 #' @name flair

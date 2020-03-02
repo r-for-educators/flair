@@ -11,8 +11,10 @@ wrap_html(x, opts_list, type = "html")
 
 \item{opts_list}{The html options to include, in named vector form}
 
-\item{type}{The style of display, defaults to "html"  (currently nothing else is supported, sorry)}
+\item{type}{The style of display, defaults to "html"
+(currently nothing else is supported, sorry)}
 }
 \description{
-\code{wrap_html} returns a string with styling wrappers from a list of style tag names and values.
+\code{wrap_html} returns a string with styling wrappers from a list of style
+tag names and values.
 }
