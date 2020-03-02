@@ -4,7 +4,7 @@
 #'
 #' \code{txt_*} are shortcuts for specific individual style options
 #'
-#' Warning: These are simple direct wrappers for strings only.  If you are working with \code{demo_code} objects, you should instead use the \code{\link{highlight}} functions.
+#' Warning: These are simple direct wrappers for strings only.  If you are using \code{with_flair} objects, you should instead use the \code{\link{flair}} functions.
 #'
 #' @param x The string to be wrapped
 #' @param type The style of display, defaults to "html"  (currently nothing else is supported, sorry)
@@ -76,7 +76,7 @@ txt_style <- function(x,
 
 }
 
-
+#' @param color Named or html hex color for font.
 #' @export
 #' @rdname txt_style
 txt_color <- function(x, color = "red"){
@@ -85,18 +85,21 @@ txt_color <- function(x, color = "red"){
 
 }
 
+#' @param colour Named or html hex color for font.
 #' @export
 #' @rdname txt_style
 txt_colour <- function(x, colour = "red"){
   txt_style(x, color = colour)
 }
 
+#' @param size Font size
 #' @export
 #' @rdname txt_style
 txt_size <- function(x, size = "large"){
   txt_style(x, size = size)
 }
 
+#' @param colour Named or html hex color for text background.
 #' @export
 #' @rdname txt_style
 txt_background <- function(x, bg_color = "#ffff7f"){
@@ -115,6 +118,7 @@ txt_background <- function(x, bg_color = "#ffff7f"){
 #
 # }
 
+#' @param font A valid font family.
 #' @export
 #' @rdname txt_style
 txt_font <- function(x, font){
@@ -147,7 +151,10 @@ txt_tocode <- function(x){
 
 }
 
+#' @param before String giving specific html tags to insert before text.
+#' @param after String giving specific html tags to insert after text.
 #' @export
+#' @rdname txt_style
 txt_tag <- function(x, before, after){
 
   paste0(before, x, after)

@@ -18,17 +18,16 @@ License: MIT + file LICENSE
 URL: https://github.com/kbodwin/flair
 BugReports: https://github.com/kbodwin/flair/issues
 Imports:
+    dplyr,
     evaluate,
-    ggplot2,
     glue,
     knitr,
     magrittr,
     purrr,
+    rmarkdown,
     stringr
 Suggests: 
-    dplyr,
     learnr,
-    rmarkdown,
     rstudioapi,
     shiny,
     testthat (>= 2.1.0)

@@ -77,12 +77,12 @@ decorate_chunk <- function(chunk_name,
 
   } else {
 
-    my_code <- paste0("```{r}\n", my_code, "\n```")
+    my_code_fenced <- paste0("```{r}\n", my_code, "\n```")
 
     # knit just the chunk of interest
     if (is_live) {
 
-      knitted <- knitr::knit(text = my_code,
+      knitted <- knitr::knit(text = my_code_fenced,
                              quiet = TRUE)
 
     } else {
@@ -101,7 +101,7 @@ decorate_chunk <- function(chunk_name,
 
       }
 
-      knitted <- knitr::knit_child(text = my_code,
+      knitted <- knitr::knit_child(text = my_code_fenced,
                                  options = my_opts,
                                  quiet = TRUE)
 
@@ -110,7 +110,11 @@ decorate_chunk <- function(chunk_name,
     # convert knitted string to a list with sources separate from output
     knitted <- knitted %>% src_to_list()
 
+    where_sources <-  map(knitted, ~attr(.x, "class")) == "source"
+
     attr(knitted, "class") <- "with_flair"
+
+    attr(knitted, "orig_code_text") <- my_code
 
   }
 
@@ -146,7 +150,8 @@ src_to_list <- function(knitted) {
 #'
 #' Raw editor text has been taken from an active RStudio session via \code{rstudioapi::getSourceEditorContext()}.  Chunk delimiters and html is removed, all formatting is otherwise perserved.
 #'
-#' @param .contents
+#' @param .contents chunk contents passed from editor context
+#' @param chunk_name label of chunk
 #'
 #' @return chunk text
 #'

@@ -6,6 +6,8 @@
 \alias{flair_rx}
 \alias{flair_quick}
 \alias{flair_all}
+\alias{flair_all.default}
+\alias{flair_all.with_flair}
 \alias{flair_args}
 \alias{flair_funs}
 \alias{flair_input_vals}
@@ -19,6 +21,10 @@ flair(x, pattern, ...)
 
 flair_all(x, ...)
 
+\method{flair_all}{default}(x, ...)
+
+\method{flair_all}{with_flair}(x, ...)
+
 flair_args(x, ...)
 
 flair_funs(x, ...)
@@ -29,6 +35,10 @@ flair_input_vals(x, ...)
 \item{x}{A string object}
 
 \item{pattern}{A pattern to match.  By default, this is a fixed pattern; use \code{flair_rx} for regular expressions.}
+
+\item{before}{String giving specific html tags to insert before matched text.}
+
+\item{after}{String giving specific html tags to insert after matched text.}
 
 \item{...}{Formatting style options, passed to \code{\link{txt_style}}}
 }
@@ -53,7 +63,7 @@ The \code{decorate} functions execute source code and simultaneously prepare it 
 }
 
 \examples{
-
+\dontrun{
 code_string <- "foo <- mean(1:10, na.rm = TRUE)"
 
 code_string \%>\% flair("foo")
@@ -61,5 +71,6 @@ code_string \%>\% flair("foo")
 code_string \%>\% flair_args()
 
 code_string \%>\% flair_funs(color = "red")
+}
 
 }

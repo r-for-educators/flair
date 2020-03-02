@@ -4,14 +4,14 @@
 \alias{flair_rx.with_flair}
 \title{S3 method for \code{\link{with_flair}} objects}
 \usage{
-\method{flair_rx}{with_flair}(x, pattern, before = NULL, after = NULL, script = NULL, ...)
+\method{flair_rx}{with_flair}(x, pattern, before = NULL, after = NULL, ...)
 }
 \arguments{
-\item{x}{An object of class \code{\link{decorate_code}}.}
+\item{x}{An object of class \code{\link{with_flair}}.}
 }
 \value{
-An object of class \code{\link{decorate_code}}.
+An object of class \code{\link{with_flair}}.
 }
 \description{
-Applies flair to the \code{print_string} attribute.
+Applies flair to the source code.
 }

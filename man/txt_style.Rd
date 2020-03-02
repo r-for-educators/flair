@@ -11,6 +11,7 @@
 \alias{txt_emph}
 \alias{txt_ul}
 \alias{txt_tocode}
+\alias{txt_tag}
 \title{Wraps text in html or latex code for formatting}
 \usage{
 txt_style(
@@ -39,6 +40,8 @@ txt_emph(x)
 txt_ul(x)
 
 txt_tocode(x)
+
+txt_tag(x, before, after)
 }
 \arguments{
 \item{x}{The string to be wrapped}
@@ -52,6 +55,18 @@ txt_tocode(x)
 \item{italics}{Should the text be italicized?}
 
 \item{...}{various display options: any html CSS \code{style} options, or one of \code{font}, \code{size}, \code{color}, \code{background}, \code{style}.}
+
+\item{color}{Named or html hex color for font.}
+
+\item{colour}{Named or html hex color for text background.}
+
+\item{size}{Font size}
+
+\item{font}{A valid font family.}
+
+\item{before}{String giving specific html tags to insert before text.}
+
+\item{after}{String giving specific html tags to insert after text.}
 }
 \value{
 A string containing \code{x} with html wrappers.
@@ -62,7 +77,7 @@ A string containing \code{x} with html wrappers.
 \details{
 \code{txt_*} are shortcuts for specific individual style options
 
-Warning: These are simple direct wrappers for strings only.  If you are working with \code{demo_code} objects, you should instead use the \code{\link{highlight}} functions.
+Warning: These are simple direct wrappers for strings only.  If you are using \code{with_flair} objects, you should instead use the \code{\link{flair}} functions.
 }
 \examples{
 # General use
