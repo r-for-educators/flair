@@ -20,15 +20,16 @@ flair_lines <- function(x, lines, ...) {
 
 }
 
+#' @export
 flair_lines.default <- function(x, lines, ...) {
 
   x_split <- x %>%
     stringr::str_split("(\\n|\\<br\\>)+") %>%
     unlist()
 
-  x_split[lines] <- x_split[lines] %>% flair_all(...)
+  x_split[lines] <- x_split[lines] %>% flair_all()
 
-  return(stringr::str_c(x, collapse = "<br>"))
+  return(stringr::str_c(x_split, collapse = "<br>"))
 
 
 }
@@ -42,6 +43,7 @@ flair_lines.default <- function(x, lines, ...) {
 #' @return An object of class \code{\link{with_flair}}.
 #'
 #' @importFrom stringr str_split str_trim str_remove_all
+#' @importFrom purrr map map2
 #'
 #' @export
 flair_lines.with_flair <- function(x, lines, ...) {
