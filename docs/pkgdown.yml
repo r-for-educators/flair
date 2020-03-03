@@ -1,0 +1,6 @@
+pandoc: 2.7.3
+pkgdown: 1.4.1
+pkgdown_sha: ~
+articles:
+  how_to_flair: how_to_flair.html
+

@@ -99,6 +99,10 @@ prep_source <- function(x, doc_type) {
     #
     #   x <-
 
+  } else if (doc_type == "github_document") {
+
+    x <- paste0("<pre class='sourceCode r'>", txt_tocode(x), "</pre>")
+
   } else {
 
     x <- paste0("<pre><code class='language-r'>", txt_tocode(x), "</code></pre>")

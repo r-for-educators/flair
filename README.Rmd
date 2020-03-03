@@ -1,26 +1,48 @@
 ---
-title: "Add some flair to your source code"
-output: 
-  html_document:
-    keep_md: true
+output: github_document
 ---
 
+<!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r setup, message = FALSE, warning = FALSE}
+```{r, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
 )
-library(flair)
-library(dplyr)
-library(ggplot2)
-library(stringr)
 ```
 
+# flair
+
+<!-- badges: start -->
+[![CRAN checks](https://cranchecks.info/badges/worst/flair)](https://cran.r-project.org/web/checks/check_results_flair.html)
+<!-- badges: end -->
+
+The goal of flair is to is to provide tools for formatting R code in knitted R Markdown files.
+
+## Installation
+
+<!-- You can install the released version of flair from [CRAN](https://CRAN.R-project.org) with: -->
+
+<!-- ``` r -->
+<!-- install.packages("flair") -->
+<!-- ``` -->
+
+You can install the development version from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("kbodwin/flair")
+```
 
 ## Introduction
 
-The primary goal of the `flair` package is to provide tools for presenting R code.
+```{r}
+library(flair)
+library(dplyr)
+library(ggplot2)
+```
+
 
 It is common to show source code, in addition to code output, as part of a conference talk, workshop, or lecture.  Often, we want to call attention to certain aspects of the code. 
 
@@ -42,13 +64,6 @@ iris %>%
 
 
 Without `flair`, your approach might be to type your code into your code chunk, copy-paste it to a string, and manually format that string using html to add the background highlighting to the pipes.  What a headache!  
-
-In this vignette, we will show you how to use the `flair` package to add decorative formatting to your source code.
-
-## `with_flair` Objects
-
-The core element of the package is an object of the class `with_flair`.  These objects contain both the natural output of your R code and your flaired-up source code.
-
 
 ### Decorating a code chunk
 

@@ -196,7 +196,7 @@ flair_args <- function(x, ...) {
   # allows alphanumerics, _, and . in value name
   # Preceeded by:
   # Succeeded by: closed paren or comma
-  arg_regexp <- "(?<=(\\(|, ?))([:alnum:]|_|\\.)+(?= ?\\=)"
+  arg_regexp <- "(?<=(\\(|,\\s?))([:alnum:]|_|\\.)+(?= ?\\=)"
 
   flair_rx(x, arg_regexp, ...)
 

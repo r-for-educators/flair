@@ -9,7 +9,6 @@ vignette: >
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
   comment = "#>"
 )
 ```
@@ -114,11 +113,11 @@ decorate("how_to_pipe") %>%
   flair_funs()
 ```
 
-*Where are the **arguments**?*
+*Where are the **inputs**?*
 
 ```{r}
 decorate("how_to_pipe") %>% 
-  flair_args()
+  flair_input_vals()
 ```
 
 (Here we have left the options `echo = TRUE` for the chunks that call the `decorate()` and `flair_*()` functions, for you to see the source code.  In practice, you would not display these chunks.)
