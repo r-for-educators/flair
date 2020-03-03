@@ -7,6 +7,8 @@
 
 [![CRAN
 checks](https://cranchecks.info/badges/worst/flair)](https://cran.r-project.org/web/checks/check_results_flair.html)
+[![Travis build
+status](https://travis-ci.org/kbodwin/flair.svg?branch=master)](https://travis-ci.org/kbodwin/flair)
 <!-- badges: end -->
 
 The goal of flair is to is to provide tools for formatting R code in

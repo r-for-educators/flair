@@ -15,7 +15,7 @@ Description: flair facilitates easier formatting of R
     within code chunks, then to specifiy formatting details for the source
     code, such as highlighting of particular syntatical elements.
 License: MIT + file LICENSE
-URL: https://github.com/kbodwin/flair
+URL: https://github.com/kbodwin/flair, https://kbodwin.github.io/flair/index.html
 BugReports: https://github.com/kbodwin/flair/issues
 Imports:
     dplyr,
