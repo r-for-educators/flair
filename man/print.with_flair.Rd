@@ -2,8 +2,8 @@
 % Please edit documentation in R/with_flair.R
 \name{print.with_flair}
 \alias{print.with_flair}
-\title{When printed in console, a \code{with_flair} object should preview the
-flaired source code in the viewer pane.}
+\title{When run interactively, a \code{with_flair} object should preview the
+flaired source code in the viewer pane. (Only if in RStudio.)}
 \usage{
 \method{print}{with_flair}(x, ...)
 }
@@ -13,6 +13,6 @@ flaired source code in the viewer pane.}
 \item{...}{Other \code{print} options}
 }
 \description{
-When printed in console, a \code{with_flair} object should preview the
-flaired source code in the viewer pane.
+When run interactively, a \code{with_flair} object should preview the
+flaired source code in the viewer pane. (Only if in RStudio.)
 }

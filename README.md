@@ -39,8 +39,6 @@ library(flair)
 library(dplyr)
 ```
 
-    #> Warning: package 'dplyr' was built under R version 3.6.1
-
     #> 
     #> Attaching package: 'dplyr'
 
@@ -235,7 +233,7 @@ decorate('mean(1:10',
 
 ### Being specific with `decorate`
 
-The function `decorate` does its best to tell when it is recieving input
+The function `decorate` does its best to tell when it is receiving input
 of a chunk label versus code-as-text. However, in the event that
 something goes awry, you can always be explicit by using functions
 `decorate_code()` and `decorate_chunk()`
@@ -305,7 +303,7 @@ regular expression, rather than a fixed string.
 
 ### Syntax highlighting
 
-`flair` also includes a few shortcuts for highlighting specific aspsects
+`flair` also includes a few shortcuts for highlighting specific aspects
 of R source code. Currently, these functions are:
 
   - `flair_funs()` for *functions*

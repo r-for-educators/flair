@@ -7,7 +7,7 @@
 make_sandwiches(meat, top_buns, bottom_buns = NULL)
 }
 \arguments{
-\item{meat}{Character vector containing string sectiosn between delimiters}
+\item{meat}{Character vector containing string sections between delimiters}
 
 \item{top_buns}{Character vector containing starting delimiters}
 

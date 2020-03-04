@@ -114,8 +114,8 @@ prep_source <- function(x, doc_type) {
 }
 
 
-#' When printed in console, a \code{with_flair} object should preview the
-#' flaired source code in the viewer pane.
+#' When run interactively, a \code{with_flair} object should preview the
+#' flaired source code in the viewer pane. (Only if in RStudio.)
 #'
 #' @param x A \code{with_flair} object.
 #' @param ... Other \code{print} options
@@ -123,22 +123,35 @@ prep_source <- function(x, doc_type) {
 #' @export
 print.with_flair <- function(x, ...) {
 
-  tempDir <- tempfile()
-  dir.create(tempDir)
-  htmlFile <- file.path(tempDir, "index.html")
+  editorIsOpen <- tryCatch({
+    rstudioapi::getSourceEditorContext()
+    TRUE
+  }, error = function(e) FALSE)
 
-  where_sources <- map(x, ~attr(.x, "class")) == "source"
+  if (editorIsOpen) {
 
-  x <- x[where_sources]
+    tempDir <- tempfile()
+    dir.create(tempDir)
+    htmlFile <- file.path(tempDir, "index.html")
 
-  x <- map(x, function(src) prep_source(src, doc_type = "unknown"))
+    where_sources <- map(x, ~attr(.x, "class")) == "source"
 
-  x <- stringr::str_c(unlist(x), collapse = "</br>")
+    x <- x[where_sources]
 
-  writeLines(x, htmlFile)
+    x <- map(x, function(src) prep_source(src, doc_type = "unknown"))
 
-  viewer <- getOption("viewer")
-  viewer(htmlFile)
+    x <- stringr::str_c(unlist(x), collapse = "</br>")
+
+    writeLines(x, htmlFile)
+
+    viewer <- getOption("viewer")
+    viewer(htmlFile)
+
+  } else {
+
+    return()
+
+  }
 
 }
 

@@ -178,7 +178,7 @@ decorate('mean(1:10',
 
 ### Being specific with `decorate`
 
-The function `decorate` does its best to tell when it is recieving input of a chunk label versus code-as-text.  However, in the event that something goes awry, you can always be explicit by using functions `decorate_code()` and `decorate_chunk()`
+The function `decorate` does its best to tell when it is receiving input of a chunk label versus code-as-text.  However, in the event that something goes awry, you can always be explicit by using functions `decorate_code()` and `decorate_chunk()`
 
 ```{r, eval = FALSE}
 decorate_code('mean(1:10)') %>%
@@ -228,7 +228,7 @@ The function `flair_rx` takes pattern matching input in the form of a regular ex
 
 ### Syntax highlighting
 
-`flair` also includes a few shortcuts for highlighting specific aspsects of R source code.  Currently, these functions are:
+`flair` also includes a few shortcuts for highlighting specific aspects of R source code.  Currently, these functions are:
 
 * `flair_funs()` for *functions*
 

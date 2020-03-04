@@ -12,3 +12,4 @@ docs/
 ^docs$
 ^pkgdown$
 ^\.travis\.yml$
+^cran-comments\.md$

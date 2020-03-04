@@ -161,7 +161,7 @@ src_to_list <- function(knitted) {
 #'
 #' Raw editor text has been taken from an active RStudio session via
 #' \code{rstudioapi::getSourceEditorContext()}.  Chunk delimiters and html is
-#' removed, all formatting is otherwise perserved.
+#' removed, all formatting is otherwise preserved.
 #'
 #' @param .contents chunk contents passed from editor context
 #' @param chunk_name label of chunk

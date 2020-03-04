@@ -1,5 +1,5 @@
 Package: flair
-Title: flair: Highlight, annotate, and format your R source code
+Title: Highlight, Annotate, and Format your R Source Code
 Version: 0.0.2
 Authors@R: 
     c(person(given = "Kelly",
@@ -9,11 +9,11 @@ Authors@R:
       person(given = "Hunter",
              family = "Glanz",
              role = "aut"))
-Description: flair facilitates easier formatting of R
+Description: This package facilitates easier formatting of R
     source code in a R Markdown-based presentation. The main goal of the
     package is to allow users to preserve their code creation process
-    within code chunks, then to specifiy formatting details for the source
-    code, such as highlighting of particular syntatical elements.
+    within code chunks, then to specify formatting details for the source
+    code, such as highlighting of particular syntactical elements.
 License: MIT + file LICENSE
 URL: https://github.com/kbodwin/flair, https://kbodwin.github.io/flair/index.html
 BugReports: https://github.com/kbodwin/flair/issues
