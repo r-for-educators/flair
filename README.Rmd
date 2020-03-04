@@ -12,7 +12,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# flair <a href='http://kbodwin.github.io/flair.index.html'><img src='man/figures/flair_hex.png' align="right" height="139" /></a>
+# flair <a href='http://kbodwin.github.io/flair/index.html'><img src='man/figures/flair_hex.png' align="right" height="139" /></a>
 
 <!-- badges: start -->
 [![CRAN checks](https://cranchecks.info/badges/worst/flair)](https://cran.r-project.org/web/checks/check_results_flair.html)
