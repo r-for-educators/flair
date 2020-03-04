@@ -207,21 +207,19 @@ decorate("how_to_pipe") %&gt;%
 </code></pre>
 <p>For the most part, we do not recommend this option, as it is more difficult to pre-test your code in string from than in a true chunk.</p>
 <p>However, this option is particularly nice if you want to show “bad” code that cannot normally be evaluated. For example:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw"><a href="../reference/decorate.html">decorate</a></span>(<span class="st">'mean(1:10'</span>,</span>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw"><a href="../reference/decorate.html">decorate</a></span>(<span class="st">'mean(not_an_object)'</span>,</span>
 <span id="cb12-2"><a href="#cb12-2"></a>         <span class="dt">error =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></span>
-<span id="cb12-3"><a href="#cb12-3"></a><span class="st">  </span><span class="kw"><a href="../reference/flair.html">flair</a></span>(<span class="st">"("</span>)</span></code></pre></div>
-<pre><code class="language-r"><code>mean<span style="background-color:#ffff7f">(</span>1:10</code></code></pre>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="st">  </span><span class="kw"><a href="../reference/flair.html">flair</a></span>(<span class="st">"not_an_object"</span>)</span></code></pre></div>
+<pre><code class="language-r"><code>mean(<span style="background-color:#ffff7f">not_an_object</span>)</code></code></pre>
 <pre><code>
-#&gt; Error: &lt;text&gt;:2:0: unexpected end of input
-#&gt; 1: mean(1:10
-#&gt;    ^
+#&gt; Error in mean(not_an_object): object 'not_an_object' not found
 </code></pre>
 </div>
 <div id="being-specific-with-decorate" class="section level3">
 <h3 class="hasAnchor">
 <a href="#being-specific-with-decorate" class="anchor"></a>Being specific with <code>decorate</code>
 </h3>
-<p>The function <code>decorate</code> does its best to tell when it is recieving input of a chunk label versus code-as-text. However, in the event that something goes awry, you can always be explicit by using functions <code><a href="../reference/decorate_code.html">decorate_code()</a></code> and <code><a href="../reference/decorate_chunk.html">decorate_chunk()</a></code></p>
+<p>The function <code>decorate</code> does its best to tell when it is receiving input of a chunk label versus code-as-text. However, in the event that something goes awry, you can always be explicit by using functions <code><a href="../reference/decorate_code.html">decorate_code()</a></code> and <code><a href="../reference/decorate_chunk.html">decorate_chunk()</a></code></p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw"><a href="../reference/decorate_code.html">decorate_code</a></span>(<span class="st">'mean(1:10)'</span>) <span class="op">%&gt;%</span></span>
 <span id="cb14-2"><a href="#cb14-2"></a><span class="st">  </span><span class="kw"><a href="../reference/flair.html">flair</a></span>(<span class="st">"("</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="kw"><a href="../reference/decorate_chunk.html">decorate_chunk</a></span>(<span class="st">'how_to_pipe'</span>) <span class="op">%&gt;%</span></span>
@@ -289,7 +287,7 @@ decorate("how_to_pipe") %&gt;%
 <div id="syntax-highlighting" class="section level3">
 <h3 class="hasAnchor">
 <a href="#syntax-highlighting" class="anchor"></a>Syntax highlighting</h3>
-<p><code>flair</code> also includes a few shortcuts for highlighting specific aspsects of R source code. Currently, these functions are:</p>
+<p><code>flair</code> also includes a few shortcuts for highlighting specific aspects of R source code. Currently, these functions are:</p>
 <ul>
 <li><p><code><a href="../reference/flair.html">flair_funs()</a></code> for <em>functions</em></p></li>
 <li><p><code><a href="../reference/flair.html">flair_args()</a></code> for <em>arguments to functions</em></p></li>

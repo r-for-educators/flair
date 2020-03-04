@@ -1,8 +1,15 @@
-#' Adds decorative formatting (flair) to parts of a string or source code.
+#' Formats source code
 #'
-#' \code{flair} returns a string with formatting wrappers (currently only html)
+#' Adds decorative formatting to parts of a string or source code.
 #'
-#' @param x A string object
+#' If input is a string object, \code{flair} returns a formatted string.
+#'
+#' If input is a \code{\link{with_flair}} object, \code{flair} returns a
+#'  \code{\link{with_flair}} object with the source elements formatted.
+#'
+#' Currently, \code{flair} is only built for html formatting.
+#'
+#' @param x A string or \code{\link{with_flair}} object
 #' @param pattern A pattern to match.  By default, this is a fixed pattern;
 #' use \code{flair_rx} for regular expressions.
 #' @param before String giving specific html tags to insert before matched text.
@@ -22,10 +29,18 @@
 #' code_string %>% flair_funs(color = "red")
 #' }
 #'
-#' @import stringr
-#'
 #' @rdname flair
-#'
+#' @export
+flair <- function(x, pattern,
+                  before = NULL,
+                  after = NULL, ...) {
+
+  flair_rx(x, fixed(pattern), before, after, ...)
+
+}
+
+#' @import stringr
+#' @rdname flair
 #' @export
 flair_rx <- function(x, pattern,
                      before = NULL, after = NULL,
@@ -35,19 +50,8 @@ flair_rx <- function(x, pattern,
 
 #' S3 method for \code{\link{with_flair}} objects
 #'
-#' Applies flair to the source code.
-#'
-#' @param x An object of class \code{\link{with_flair}}.
-#' @param pattern A pattern to match.  By default, this is a fixed pattern;
-#' use \code{flair_rx} for regular expressions.
-#' @param before String giving specific html tags to insert before matched text.
-#' @param after String giving specific html tags to insert after matched text.
-#' @param ... Formatting style options, passed to \code{\link{txt_style}}
-#'
-#' @return An object of class \code{\link{with_flair}}.
-#'
 #' @importFrom purrr map
-#'
+#' @rdname flair
 #' @export
 flair_rx.with_flair = function(x, pattern,
                                before = NULL, after = NULL,
@@ -71,13 +75,8 @@ flair_rx.with_flair = function(x, pattern,
 }
 
 #' Default S3 method for \code{\link{flair_rx}}.
-#'
-#' @param x A string or \code{\link{with_flair}} object
-#' @param pattern A pattern to match.  By default, this is a fixed pattern;
-#' use \code{flair_rx} for regular expressions.
-#' @param before String giving specific html tags to insert before matched text.
-#' @param after String giving specific html tags to insert after matched text.
-#' @param ... Formatting style options, passed to \code{\link{txt_style}}
+#' @importFrom stringr str_extract_all str_c
+#' @rdname flair
 #'
 #' @export
 flair_rx.default <- function(x, pattern,
@@ -141,13 +140,6 @@ flair_quick <- function(x, pattern,
 }
 
 
-#' @rdname flair
-#' @export
-flair <- function(x, pattern, ...) {
-
-  flair_rx(x, fixed(pattern), ...)
-
-}
 
 #' @rdname flair
 #' @export

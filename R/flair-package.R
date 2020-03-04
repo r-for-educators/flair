@@ -1,6 +1,6 @@
-#' flair: A package for adding flair to your displayed source code.
+#' A package for adding flair to your displayed source code.
 #'
-#' The flair package provides ...
+#' This package provides ...
 #'
 #' @section Flair functions:
 #'
@@ -12,7 +12,7 @@
 #' it to have flair added, to display when knitted.
 #'
 #' @docType package
-#' @name flair
+#' @name flair-package
 NULL
 ## quiets concerns of R CMD check re: the .'s that appear in pipelines
 if (getRversion() >= "2.15.1")  utils::globalVariables(c("."))

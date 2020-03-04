@@ -9,7 +9,7 @@ Authors@R:
       person(given = "Hunter",
              family = "Glanz",
              role = "aut"))
-Description: This package facilitates easier formatting of R
+Description: Facilitates easier formatting and highlighting of R
     source code in a R Markdown-based presentation. The main goal of the
     package is to allow users to preserve their code creation process
     within code chunks, then to specify formatting details for the source

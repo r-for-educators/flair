@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>flair: A package for adding flair to your displayed source code. — flair • flair</title>
+<title>Formats source code — flair • flair</title>
 
 
 <!-- jquery -->
@@ -35,9 +35,8 @@
 
 
 
-<meta property="og:title" content="flair: A package for adding flair to your displayed source code. — flair" />
-<meta property="og:description" content="The flair package provides ...
-flair returns a string with formatting wrappers (currently only html)" />
+<meta property="og:title" content="Formats source code — flair" />
+<meta property="og:description" content="Adds decorative formatting to parts of a string or source code." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -121,21 +120,26 @@ flair returns a string with formatting wrappers (currently only html)" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>flair: A package for adding flair to your displayed source code.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/kbodwin/flair/blob/master/R/flair-package.R'><code>R/flair-package.R</code></a>, <a href='https://github.com/kbodwin/flair/blob/master/R/flair.R'><code>R/flair.R</code></a></small>
+    <h1>Formats source code</h1>
+    <small class="dont-index">Source: <a href='https://github.com/kbodwin/flair/blob/master/R/flair.R'><code>R/flair.R</code></a></small>
     <div class="hidden name"><code>flair.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>The flair package provides ...</p>
-<p><code>flair</code> returns a string with formatting wrappers (currently only html)</p>
+    <p>Adds decorative formatting to parts of a string or source code.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>flair_rx</span>(<span class='no'>x</span>, <span class='no'>pattern</span>, <span class='kw'>before</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>after</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>flair</span>(<span class='no'>x</span>, <span class='no'>pattern</span>, <span class='kw'>before</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>after</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)
+
+<span class='fu'>flair_rx</span>(<span class='no'>x</span>, <span class='no'>pattern</span>, <span class='kw'>before</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>after</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for with_flair</span>
+<span class='fu'>flair_rx</span>(<span class='no'>x</span>, <span class='no'>pattern</span>, <span class='kw'>before</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>after</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for default</span>
+<span class='fu'>flair_rx</span>(<span class='no'>x</span>, <span class='no'>pattern</span>, <span class='kw'>before</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>after</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)
 
 <span class='fu'>flair_quick</span>(<span class='no'>x</span>, <span class='no'>pattern</span>, <span class='kw'>before</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>after</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)
-
-<span class='fu'>flair</span>(<span class='no'>x</span>, <span class='no'>pattern</span>, <span class='no'>...</span>)
 
 <span class='fu'>flair_all</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
@@ -156,7 +160,7 @@ flair returns a string with formatting wrappers (currently only html)" />
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>A string object</p></td>
+      <td><p>A string or <code><a href='with_flair.html'>with_flair</a></code> object</p></td>
     </tr>
     <tr>
       <th>pattern</th>
@@ -180,19 +184,12 @@ use <code>flair_rx</code> for regular expressions.</p></td>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A string with formatting wrappers.</p>
-    <h2 class="hasAnchor" id="flair-functions"><a class="anchor" href="#flair-functions"></a>Flair functions</h2>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    
-
-
-<p>The <code>flair_*</code> functions add decorative formatting to source code.</p>
-    <h2 class="hasAnchor" id="decorate-functions"><a class="anchor" href="#decorate-functions"></a>Decorate functions</h2>
-
-    
-
-
-<p>The <code>decorate</code> functions execute source code and simultaneously prepare
-it to have flair added, to display when knitted.</p>
+    <p>If input is a string object, <code>flair</code> returns a formatted string.</p>
+<p>If input is a <code><a href='with_flair.html'>with_flair</a></code> object, <code>flair</code> returns a
+ <code><a href='with_flair.html'>with_flair</a></code> object with the source elements formatted.</p>
+<p>Currently, <code>flair</code> is only built for html formatting.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
@@ -210,8 +207,7 @@ it to have flair added, to display when knitted.</p>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
-      <li><a href="#flair-functions">Flair functions</a></li>
-      <li><a href="#decorate-functions">Decorate functions</a></li>
+      <li><a href="#details">Details</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

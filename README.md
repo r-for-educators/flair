@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# flair
+# flair <a href='http://kbodwin.github.io/flair.index.html'><img src='man/figures/flair_hex.png' align="right" height="139" /></a>
 
 <!-- badges: start -->
 
