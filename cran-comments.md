@@ -6,4 +6,6 @@
 ## R CMD check results
 There were no ERRORs or WARNINGs.
 
-There are no NOTEs.
+There is one NOTE:  
+
+New submission
