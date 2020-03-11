@@ -5,8 +5,8 @@
 
 <!-- badges: start -->
 
-[![CRAN
-checks](https://cranchecks.info/badges/worst/flair)](https://cran.r-project.org/web/checks/check_results_flair.html)
+<!-- [![CRAN checks](https://cranchecks.info/badges/worst/flair)](https://cran.r-project.org/web/checks/check_results_flair.html) -->
+
 [![Travis build
 status](https://travis-ci.org/kbodwin/flair.svg?branch=master)](https://travis-ci.org/kbodwin/flair)
 <!-- badges: end -->
@@ -37,20 +37,6 @@ devtools::install_github("kbodwin/flair")
 ``` r
 library(flair)
 library(dplyr)
-```
-
-    #> 
-    #> Attaching package: 'dplyr'
-
-    #> The following objects are masked from 'package:stats':
-    #> 
-    #>     filter, lag
-
-    #> The following objects are masked from 'package:base':
-    #> 
-    #>     intersect, setdiff, setequal, union
-
-``` r
 library(ggplot2)
 ```
 
