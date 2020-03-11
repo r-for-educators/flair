@@ -9,3 +9,7 @@ There were no ERRORs or WARNINGs.
 There is one NOTE:  
 
 New submission
+
+## Messages
+
+Resubmission with inactive URL removed.
