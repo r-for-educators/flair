@@ -40,6 +40,8 @@ library(dplyr)
 library(ggplot2)
 ```
 
+**Important**:  This ReadMe shows the basic usage, but the resultant formatting cannot be displayed outside of an html document.  Please reference the Pkgdown site at [https://kbodwin.github.io/flair/index.html](https://kbodwin.github.io/flair/index.html) for full examples.
+
 It is common to show source code, in addition to code output, as part of
 a conference talk, workshop, or lecture. Often, we want to call
 attention to certain aspects of the code.
@@ -48,7 +50,11 @@ For example, suppose you want to illustrate to a new learner the use of
 the pipe `%>%`. You might want to create a slide that shows the
 following:
 
-<pre class='sourceCode r'><code>iris <span style='background-color:#ffff7f'>%>%</span><br>&nbsp;&nbsp;group_by(Species) <span style='background-color:#ffff7f'>%>%</span><br>&nbsp;&nbsp;summarize(mean(Sepal.Length))</code></pre>
+<pre class='sourceCode r'><code>iris %>%
+<br>&nbsp;&nbsp;group_by(Species) %>%
+<br>&nbsp;&nbsp;summarize(mean(Sepal.Length))</code></pre>
+
+but with the pipes highlighted for emphasis.
 
 ``` 
 
@@ -100,20 +106,6 @@ decorate("how_to_pipe") %>%
 Note that the `decorate` and `flair` step should be in a separate chunk,
 since it is not itself part of the source code you wish to decorate.
 
-With the above two code chunks in our source file, the resulting knitted
-output looks like this:
-
-<pre class='sourceCode r'><code>iris <span style='background-color:#ffff7f'>%>%</span><br>&nbsp;&nbsp;group_by(Species) <span style='background-color:#ffff7f'>%>%</span><br>&nbsp;&nbsp;summarize(mean(Sepal.Length))</code></pre>
-
-``` 
-
-#> # A tibble: 3 x 2
-#>   Species    `mean(Sepal.Length)`
-#>   <fct>                     <dbl>
-#> 1 setosa                     5.01
-#> 2 versicolor                 5.94
-#> 3 virginica                  6.59
-```
 
 #### Re-referencing a chunk
 
@@ -121,50 +113,19 @@ A nice consequence of using the chunk label approach to `flair` is that
 the same chunk can be displayed multiple times, with different flair
 decorations, without needing to retype the original code.
 
-For example, you might want to create the following for classroom
-purposes:
-
-*Where are the **functions**?*
+For example, you might want to create multiple slides to reference the various 
+elements of a code chunk.  Your source code chunks might look like:
 
 ``` r
 decorate("how_to_pipe") %>% 
   flair_funs()
 ```
 
-<pre class='sourceCode r'><code>iris %>%<br>&nbsp;&nbsp;<span style='background-color:#ffff7f'>group_by</span>(Species) %>%<br>&nbsp;&nbsp;<span style='background-color:#ffff7f'>summarize</span>(<span style='background-color:#ffff7f'>mean</span>(Sepal.Length))</code></pre>
-
-``` 
-
-#> # A tibble: 3 x 2
-#>   Species    `mean(Sepal.Length)`
-#>   <fct>                     <dbl>
-#> 1 setosa                     5.01
-#> 2 versicolor                 5.94
-#> 3 virginica                  6.59
-```
-
-*Where are the **arguments**?*
-
 ``` r
 decorate("how_to_pipe") %>% 
   flair_args()
 ```
 
-<pre class='sourceCode r'><code>iris %>%<br>&nbsp;&nbsp;group_by(Species) %>%<br>&nbsp;&nbsp;summarize(mean(Sepal.Length))</code></pre>
-
-``` 
-
-#> # A tibble: 3 x 2
-#>   Species    `mean(Sepal.Length)`
-#>   <fct>                     <dbl>
-#> 1 setosa                     5.01
-#> 2 versicolor                 5.94
-#> 3 virginica                  6.59
-```
-
-(Here we have left the options `echo = TRUE` for the chunks that call
-the `decorate()` and `flair_*()` functions, for you to see the source
-code. In practice, you would not display these chunks.)
 
 ### Decorating code from a text string
 
@@ -180,20 +141,6 @@ iris %>%
 
 ') %>%
   flair("%>%")
-```
-
-produces
-
-<pre class='sourceCode r'><code>iris <span style='background-color:#ffff7f'>%>%</span><br>&nbsp;&nbsp;group_by(Species) <span style='background-color:#ffff7f'>%>%</span><br>&nbsp;&nbsp;summarize(mean(Sepal.Length))</code></pre>
-
-``` 
-
-#> # A tibble: 3 x 2
-#>   Species    `mean(Sepal.Length)`
-#>   <fct>                     <dbl>
-#> 1 setosa                     5.01
-#> 2 versicolor                 5.94
-#> 3 virginica                  6.59
 ```
 
 For the most part, we do not recommend this option, as it is more
@@ -268,17 +215,6 @@ decorate('how_to_pipe') %>%
   flair("Species", color = "CornflowerBlue")
 ```
 
-<pre class='sourceCode r'><code>iris <span style='background-color:#ffff7f'>%>%</span><br>&nbsp;&nbsp;group_by(<span style='color:CornflowerBlue'>Species</span>) <span style='background-color:#ffff7f'>%>%</span><br>&nbsp;&nbsp;summarize(mean(<span style='background-color:pink'>Sepal.Length</span>))</code></pre>
-
-``` 
-
-#> # A tibble: 3 x 2
-#>   Species    `mean(Sepal.Length)`
-#>   <fct>                     <dbl>
-#> 1 setosa                     5.01
-#> 2 versicolor                 5.94
-#> 3 virginica                  6.59
-```
 
 ### flair\_rx
 
@@ -313,10 +249,6 @@ ggplot(iris, aes(x = Sepal.Length,
   flair_input_vals(background = "Aquamarine") %>%
   flair_rx("[A-z]*\\.Length", background = "pink")
 ```
-
-<pre class='sourceCode r'><code><span style='color:Coral;underline:text-decoration'>ggplot</span>(<span style='background-color:Aquamarine'>iris</span>, <span style='color:Coral;underline:text-decoration'>aes</span>(<span style='color:CornflowerBlue'>x</span> = <span style='background-color:Aquamarine'><span style='background-color:pink'>Sepal.Length</span></span>, <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y = <span style='background-color:Aquamarine'><span style='background-color:pink'>Petal.Length</span></span>, <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;color = <span style='background-color:Aquamarine'>Species</span>)) +<br>&nbsp;&nbsp;<span style='color:Coral;underline:text-decoration'>geom_point</span>()</code></pre>
-
-<img src="man/figures/README-unnamed-chunk-23-1.png" width="100%" />
 
 ## Errata
 
