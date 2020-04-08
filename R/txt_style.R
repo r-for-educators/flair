@@ -15,6 +15,7 @@
 #' @param bold Should the text be bolded?
 #' @param underline Should the text be underlined?
 #' @param italics Should the text be italicized?
+#' @param font A valid font family.
 #' @param ... various display options: any html CSS \code{style} options, or one
 #' of \code{font}, \code{size}, \code{color}, \code{background}, \code{style}.
 #'
@@ -114,16 +115,12 @@ txt_background <- function(x, bg_color = "#ffff7f"){
 }
 
 ## Want this to auto-lighten background color
-
-#' @export
-#' @rdname txt_style
 # txt_highlight <- function(x, hlt_color){
 #
 #   txt_style(x, background = hlt_color)
 #
 # }
 
-#' @param font A valid font family.
 #' @export
 #' @rdname txt_style
 txt_font <- function(x, font){
