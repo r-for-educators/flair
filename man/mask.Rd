@@ -19,15 +19,15 @@ mask_rx(x, pattern, before = NULL, after = NULL, ...)
 mask_quick(x, pattern, before = NULL, after = NULL, ...)
 }
 \arguments{
-\item{pattern}{A regular expression to match}
+\item{x}{A string object or \code{\link{decorate_code}} object.}
+
+\item{pattern}{A pattern to match}
 
 \item{before}{Custom preceding html tag}
 
 \item{after}{Custom ending html tag}
 
 \item{...}{Further formatting options, passed to \code{\link{txt_style}}}
-
-\item{.string}{A string object}
 }
 \description{
 Blanks out part of the string
