@@ -2,20 +2,37 @@
 % Please edit documentation in R/mask.R
 \name{mask}
 \alias{mask}
-\alias{mask_regexp}
+\alias{mask_rx}
+\alias{mask_rx.with_flair}
+\alias{mask_rx.default}
+\alias{mask_quick}
 \title{Blanks out part of the string}
 \usage{
-mask(.string, pattern, ...)
+mask(x, pattern, before = NULL, after = NULL, ...)
 
-mask_regexp(.string, pattern, ...)
+mask_rx(x, pattern, before = NULL, after = NULL, ...)
+
+\method{mask_rx}{with_flair}(x, pattern, before = NULL, after = NULL, ...)
+
+\method{mask_rx}{default}(x, pattern, before = NULL, after = NULL, ...)
+
+mask_quick(x, pattern, before = NULL, after = NULL, ...)
 }
 \arguments{
-\item{.string}{A string object}
-
 \item{pattern}{A regular expression to match}
 
+\item{before}{Custom preceding html tag}
+
+\item{after}{Custom ending html tag}
+
 \item{...}{Further formatting options, passed to \code{\link{txt_style}}}
+
+\item{.string}{A string object}
 }
 \description{
 Blanks out part of the string
+
+S3 method for \code{\link{with_flair}} objects
+
+Default S3 method for \code{\link{flair_rx}}.
 }
