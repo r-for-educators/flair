@@ -14,7 +14,7 @@
 #' my_code <- decorate_code(text = 'mean(1:10)') %>% flair_funs()
 #'
 #' # The object itself, when printed, previews your code with flair
-#'\dontrun{
+#'\donttest{
 #' my_code
 #' }
 #'

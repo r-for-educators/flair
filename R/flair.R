@@ -19,7 +19,7 @@
 #' @return A string with formatting wrappers.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' code_string <- "foo <- mean(1:10, na.rm = TRUE)"
 #'
 #' code_string %>% flair("foo")

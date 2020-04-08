@@ -1,15 +1,14 @@
 #' Blanks out part of the string
 #'
-#' @param .string A string object
-#' @param pattern A regular expression to match
+#' @param x A string object or \code{\link{decorate_code}} object.
+#' @param pattern A pattern to match
 #' @param before Custom preceding html tag
 #' @param after Custom ending html tag
 #' @param ... Further formatting options, passed to \code{\link{txt_style}}
 #' @rdname mask
 #' @export
 mask <- function(x, pattern,
-                  before = NULL,
-                  after = NULL, ...) {
+                  before = NULL, after = NULL, ...) {
 
   mask_rx(x, fixed(pattern), before, after, ...)
 

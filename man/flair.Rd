@@ -63,7 +63,7 @@ If input is a \code{\link{with_flair}} object, \code{flair} returns a
 Currently, \code{flair} is only built for html formatting.
 }
 \examples{
-\dontrun{
+\donttest{
 code_string <- "foo <- mean(1:10, na.rm = TRUE)"
 
 code_string \%>\% flair("foo")
