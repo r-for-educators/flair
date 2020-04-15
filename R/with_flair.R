@@ -4,7 +4,7 @@
 #'
 #' @param x A text object or code chunk label
 #'
-#' @returns An object of class \code{with_flair}
+#' @return An object of class \code{with_flair}
 #'
 #' @export
 with_flair <- function(x) {
@@ -17,6 +17,8 @@ with_flair <- function(x) {
 #'
 #' @param x A \code{with_flair} object.
 #' @param ... Other \code{knit_print} options
+#'
+#' @return "as-is" html output, to be rendered when knitted
 #'
 #' @importFrom purrr map
 #'
@@ -50,7 +52,7 @@ knit_print.with_flair <- function(x, ...) {
 #' @param x Text of source code.
 #' @param doc_type Document type to knit to.
 #'
-#' @returns Properly wrapped text.
+#' @return Properly wrapped text.
 #'
 prep_source <- function(x, doc_type) {
 
@@ -119,6 +121,8 @@ prep_source <- function(x, doc_type) {
 #'
 #' @param x A \code{with_flair} object.
 #' @param ... Other \code{print} options
+#'
+#' @return None
 #'
 #' @export
 print.with_flair <- function(x, ...) {

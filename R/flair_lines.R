@@ -87,6 +87,8 @@ flair_lines.with_flair <- function(x, lines) {
 #' @param nums List of overall lines contained
 #' @param lines Which lines to highlight
 #'
+#' @return Text with formatting wrappers
+#'
 #' @importFrom stringr str_split str_c
 flair_sublines <- function(text, nums, lines) {
   which_lines <- which(nums %in% lines)

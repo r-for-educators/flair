@@ -12,6 +12,9 @@ flaired source code in the viewer pane. (Only if in RStudio.)}
 
 \item{...}{Other \code{print} options}
 }
+\value{
+None
+}
 \description{
 When run interactively, a \code{with_flair} object should preview the
 flaired source code in the viewer pane. (Only if in RStudio.)

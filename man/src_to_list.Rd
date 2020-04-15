@@ -10,6 +10,9 @@ src_to_list(knitted)
 \arguments{
 \item{knitted}{Text of knitted code}
 }
+\value{
+A list with code sources and knitted output.
+}
 \description{
 Takes plain text of knitted code and converts it to a list, in which code
 sources have the class \code{source}.

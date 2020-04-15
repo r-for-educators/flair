@@ -13,6 +13,9 @@ flair_sublines(text, nums, lines)
 
 \item{lines}{Which lines to highlight}
 }
+\value{
+Text with formatting wrappers
+}
 \description{
 Helper for \code{flair_lines}
 }

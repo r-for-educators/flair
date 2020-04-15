@@ -11,6 +11,9 @@ knit_print.with_flair(x, ...)
 
 \item{...}{Other \code{knit_print} options}
 }
+\value{
+"as-is" html output, to be rendered when knitted
+}
 \description{
 S3 method for knitting a \code{with_flair} object
 }

@@ -137,6 +137,8 @@ decorate_chunk <- function(chunk_name,
 #'
 #' @param knitted Text of knitted code
 #'
+#' @return A list with code sources and knitted output.
+#'
 #' @export
 src_to_list <- function(knitted) {
 
