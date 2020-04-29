@@ -54,7 +54,7 @@ knit_print.with_flair <- function(x, ...) {
 #'
 #' @return Properly wrapped text.
 #'
-prep_source <- function(x, doc_type) {
+prep_source <- function(x, doc_type = "unknown") {
 
   x <- stringr::str_trim(x) %>%
     stringr::str_replace_all("(?<=\\s) ", "&nbsp;")
@@ -65,7 +65,7 @@ prep_source <- function(x, doc_type) {
 
   } else if (doc_type == "word_document") {
 
-    # word is dumb
+    stop("Knitting to word is not yet supported in flair")
 
   } else {
 
@@ -76,10 +76,12 @@ prep_source <- function(x, doc_type) {
   #### Wrap source in appropriate code formatting tags ####
 
   if (doc_type == "pdf_document") {
-    # figure this out
+
+    stop("Knitting to pdf is not yet supported in flair.")
+
   } else if (doc_type == "word_document") {
 
-    # also this
+    stop("Knitting to pdf is not yet supported in flair.")
 
   } else if (doc_type == "html_document") {
 
