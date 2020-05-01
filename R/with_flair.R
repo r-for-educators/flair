@@ -27,9 +27,9 @@ knit_print.with_flair <- function(x, ...) {
 
   get_doc_type <- purrr::safely(rmarkdown::all_output_formats)(knitr::current_input())
 
-  if (!is.null(get_doc_type$error)) {
+  if (!is.null(get_doc_type$error) || is.null(get_doc_type$result)) {
 
-    doc_type = "unknown"
+    doc_type <- "unknown"
 
   } else {
 
