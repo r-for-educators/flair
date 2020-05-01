@@ -4,7 +4,7 @@
 \alias{prep_source}
 \title{Helper for \code{knit_print.with_flair}}
 \usage{
-prep_source(x, doc_type)
+prep_source(x, doc_type = "unknown")
 }
 \arguments{
 \item{x}{Text of source code.}
