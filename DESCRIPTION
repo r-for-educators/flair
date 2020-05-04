@@ -18,9 +18,6 @@ License: MIT + file LICENSE
 URL: https://github.com/kbodwin/flair, https://kbodwin.github.io/flair/index.html
 BugReports: https://github.com/kbodwin/flair/issues
 Imports:
-    dplyr,
-    evaluate,
-    ggplot2,
     glue,
     knitr,
     magrittr,
