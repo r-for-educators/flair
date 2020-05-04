@@ -247,7 +247,7 @@ code_from_editor <- function(.contents, chunk_name) {
 #'
 #' Helper for decorate_chunk
 #'
-#' @param opt_list A list, presumably of chunk options
+#' @param opts_list A list, presumably of chunk options
 #'
 #' @return A character vector
 list_to_strings <- function(opts_list) {

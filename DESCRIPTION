@@ -23,7 +23,9 @@ Imports:
     magrittr,
     purrr,
     rmarkdown,
-    stringr
+    stringr,
+    ggplot2,
+    dplyr
 Suggests: 
     learnr,
     rstudioapi,

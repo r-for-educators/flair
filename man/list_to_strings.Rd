@@ -7,7 +7,7 @@
 list_to_strings(opts_list)
 }
 \arguments{
-\item{opt_list}{A list, presumably of chunk options}
+\item{opts_list}{A list, presumably of chunk options}
 }
 \value{
 A character vector
