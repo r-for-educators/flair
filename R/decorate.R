@@ -1,3 +1,4 @@
+
 #' Builds a \code{\link{with_flair}} object from either a code chunk or a
 #' string object containing source code.
 #'
