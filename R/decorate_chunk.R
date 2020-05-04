@@ -11,8 +11,14 @@
 #' pulls the relevant chunk source during \code{knitr::knit_hooks$set("source").}
 #'
 #' @param chunk_name The label name of the chunk we plan to add \code{\link{flair}} to.
+#' @param eval Evaluation options for chunk;
+#' behaves identically to ordinary \code{knitr} code chunk option \code{eval}
+#' @param echo Evaluation options for chunk;
+#' behaves identically to ordinary \code{knitr} code chunk option \code{echo}
+#' @param include Evaluation options for chunk;
+#' behaves identically to ordinary \code{knitr} code chunk option \code{include}
 #'
-#' @param ...  Any number of chunk options to override.
+#' @param ...  Any number of other chunk options to override.
 #'
 #' @return An object of class \code{\link{with_flair}}
 #'
@@ -20,73 +26,81 @@
 #'
 #' @export
 decorate_chunk <- function(chunk_name,
-                        ...) {
+                           eval = TRUE, echo = TRUE, include = TRUE, ...) {
 
   my_code <- NULL
 
   is_live <- FALSE
 
-  try_chunk <- purrr::safely(knitr::knit_code$get)(chunk_name)
+  # Check to see if we're in editor context
+  if (requireNamespace("rstudioapi", quietly = TRUE) && rstudioapi::isAvailable()) {
 
-
-  if (is.null(try_chunk$error) && !is.null(try_chunk$result)) {
-
-    my_code <- str_c(try_chunk$result, collapse = "\n")
-
-    my_opts <- attributes(try_chunk$result)$chunk_opts
-
-
-  } else if (requireNamespace("rstudioapi", quietly = TRUE) && rstudioapi::isAvailable()) {
-
-    editorIsOpen <- tryCatch({
+    is_live <- tryCatch({
       rstudioapi::getSourceEditorContext()
       TRUE
     }, error = function(e) FALSE)
 
-    if (editorIsOpen) {
-      ed <- rstudioapi::getSourceEditorContext()
-      sources <- ed$contents
+  }
 
-      my_code <- code_from_editor(sources, chunk_name)
-
-      is_live <- TRUE
-
-    } #if editor open
-
-  } # chunk or editor
+  try_chunk <- purrr::safely(knitr::knit_code$get)(chunk_name)
 
 
+  # If that worked, yay we're good
+  if (is.null(try_chunk$error) && !is.null(try_chunk$result)) {
 
+    my_code <- str_c(try_chunk$result, collapse = "\n")
+
+    my_opts <- as.list(attributes(try_chunk$result)$chunk_opts)
+
+    # labels mess up knit_child
+    my_opts <- within(my_opts, rm(label))
+
+  } else if (is_live) {  # If that failed, try the editor pull
+
+    ed <- rstudioapi::getSourceEditorContext()
+    sources <- ed$contents
+
+    my_code <- code_from_editor(sources, chunk_name)
+
+  }
+
+  # If neither of those worked, error
   if (is.null(my_code)) {
 
     stop(paste0("Error: No chunk found with name '", chunk_name, "'"))
 
   }
 
-
-  # In editor, don't evaluate, but return source code for preview
+  # In editor, don't evaluate, but return source code for preview no matter what
   # In knitting, knit it as the options suggest.
   if (is_live) {
 
 
     # Don't bother evaluating if in editor
 
-    my_code <- stringr::str_replace(my_code, fixed("}"), ", eval = FALSE}")
+    my_code <- stringr::str_replace(my_code, fixed("}"),
+                                    ", eval = FALSE, echo = TRUE, include = TRUE}")
 
     knitted <- knitr::knit(text = my_code,
                            quiet = TRUE)
 
-
   } else {
 
     # OG chunk options take precedence over global settings
-    glob_opts  <- get_new_globals()
+    # glob_opts  <- get_new_globals()
+    #
+    # if (length(glob_opts) > 0) {
+    #
+    #   my_opts <- c(glob_opts[!(names(glob_opts) %in% names(my_opts))], glob_opts)
+    #
+    # }
+    #
+    # return(list_to_strings(my_opts))
 
-    if (length(glob_opts) > 0) {
-
-      my_opts <- c(glob_opts[!(names(glob_opts) %in% names(my_opts))], glob_opts)
-
-    }
+    # Replace OG chunk options with flairing options
+    my_opts[["eval"]] <- eval
+    my_opts[["echo"]] <- echo
+    my_opts[["include"]] <- include
 
 
     # Options chosen in "decorate" take precedence over OG chunk options
@@ -109,10 +123,14 @@ decorate_chunk <- function(chunk_name,
     } else {
 
       # If engine isn't overwritten, it's R
+      if (is.null(my_opts[["engine"]])) {
 
-      if (!is.null(my_opts$engine)) {
+        my_engine = "r"
 
-        my_opts$engine = "r"
+      } else {
+
+        my_engine <- my_opts[["engine"]]
+        my_opts <- within(my_opts, rm(engine))
 
       }
 
@@ -120,17 +138,16 @@ decorate_chunk <- function(chunk_name,
 
       if (length(my_opts) > 1) {
 
-        my_code <- paste0("```{", my_opts[["engine"]],
-                          ", ", list_to_string(my_opts),
+        my_code <- paste0("```{", my_engine, ", ",
+                          toString(list_to_strings(my_opts)),
                           "}\n", my_code, "\n```")
       } else {
 
-        my_code <- paste0("```{", my_opts[["engine"]], "}\n", my_code, "\n```")
+        my_code <- paste0("```{", my_engine, "}\n", my_code, "\n```")
 
       }
 
-
-      knitted <- knitr::knit(text = my_code,
+      knitted <- knitr::knit_child(text = my_code,
                                  quiet = TRUE)
 
     } # flair = FALSE or not
@@ -149,7 +166,6 @@ decorate_chunk <- function(chunk_name,
   return(knitted)
 
 }
-
 
 
 #' Takes plain text of knitted code and converts it to a list, in which code
@@ -232,9 +248,9 @@ code_from_editor <- function(.contents, chunk_name) {
 #' @param opt_list A list, presumably of chunk options
 #'
 #' @return A character vector
-list_to_string <- function(opts_list) {
+list_to_strings <- function(opts_list) {
 
-  toString(paste(names(opts_list), opts_list, sep = " = "))
+  paste(names(opts_list), opts_list, sep = " = ")
 
 }
 
@@ -246,10 +262,20 @@ list_to_string <- function(opts_list) {
 #' @return A character vector
 get_new_globals <- function() {
 
-  # Figure out global chunk options changes
-  default_opts <- list_to_string(getOption("flair.knitr_defaults"))
-  current_opts <- list_to_string(knitr::opts_chunk$get())
+  default_opts <- knitr::opts_chunk$get(default = TRUE)
+  current_opts <- knitr::opts_chunk$get()
 
-  setdiff(current_opts, default_opts)
+  names_match <- names(current_opts) %in% names(default_opts)
+  keep_1 <- current_opts[!names_match]
+
+  ol_names <- intersect(names(current_opts), names(default_opts))
+  current_opts <- current_opts[ol_names]
+  default_opts <- default_opts[ol_names]
+
+  eh <- list_to_strings(current_opts) != list_to_strings(default_opts)
+
+  keep_2 <- current_opts[eh]
+
+  c(keep_1, keep_2)
 
 }
