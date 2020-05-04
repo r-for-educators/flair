@@ -4,21 +4,12 @@
 \alias{decorate_chunk}
 \title{Builds a \code{\link{with_flair}} object from a code chunk}
 \usage{
-decorate_chunk(chunk_name, eval = TRUE, echo = TRUE, include = TRUE, ...)
+decorate_chunk(chunk_name, ...)
 }
 \arguments{
 \item{chunk_name}{The label name of the chunk we plan to add \code{\link{flair}} to.}
 
-\item{eval}{Evaluation options for chunk;
-behaves identically to ordinary \code{knitr} code chunk option \code{eval}}
-
-\item{echo}{Evaluation options for chunk;
-behaves identically to ordinary \code{knitr} code chunk option \code{echo}}
-
-\item{include}{Evaluation options for chunk;
-behaves identically to ordinary \code{knitr} code chunk option \code{include}}
-
-\item{...}{Any number of other chunk options to override.}
+\item{...}{Any number of chunk options to override.}
 }
 \value{
 An object of class \code{\link{with_flair}}
