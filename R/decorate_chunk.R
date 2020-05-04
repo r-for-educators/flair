@@ -84,12 +84,12 @@ decorate_chunk <- function(chunk_name,
 
   } else {
 
-    my_code_fenced <- paste0("```{r}\n", my_code, "\n```")
+    #my_code_fenced <- paste0("```{r}\n", my_code, "\n```")
 
     # knit just the chunk of interest
     if (is_live) {
 
-      knitted <- knitr::knit(text = my_code_fenced,
+      knitted <- knitr::knit(text = my_code,
                              quiet = TRUE)
 
     } else {
@@ -143,10 +143,10 @@ decorate_chunk <- function(chunk_name,
 src_to_list <- function(knitted) {
 
   knitted <- knitted %>%
-    split_sandwiches("```r?") %>%
+    split_sandwiches("```[A-z]*") %>%
     as.list()
 
-  before_code <- which(knitted == "```r")
+  before_code <- which(knitted == "```[A-z]+")
 
   knitted[before_code + 1] <- stringr::str_trim(knitted[before_code + 1])
 
@@ -176,7 +176,7 @@ code_from_editor <- function(.contents, chunk_name) {
 
 
   # Find the start of the desired chunk
-  chunk_regex <- paste0('\\`\\`\\`\\{r ', chunk_name, '(\\}|(,.*\\}))$')
+  chunk_regex <- paste0('\\`\\`\\`\\{[A-z]+ ', chunk_name, '(\\}|(,.*\\}))$')
 
   start_chunk <- .contents %>%
     str_which(chunk_regex)
@@ -195,7 +195,7 @@ code_from_editor <- function(.contents, chunk_name) {
     str_which(fixed("```")) %>%
     min() + start_chunk
 
-  chunk_text <- .contents[(start_chunk+1):(end_chunk-1)] %>%
+  chunk_text <- .contents[(start_chunk):(end_chunk)] %>%
     str_c(collapse = "\n")
 
   attributes(chunk_text) <- NULL
