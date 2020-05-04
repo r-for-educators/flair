@@ -50,6 +50,8 @@ decorate_chunk <- function(chunk_name,
 
     my_code <- str_c(try_chunk$result, collapse = "\n")
 
+    my_code <- stringr::str_trim(my_code)
+
     my_opts <- as.list(attributes(try_chunk$result)$chunk_opts)
 
     # labels mess up knit_child
