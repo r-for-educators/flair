@@ -21,7 +21,9 @@ with_flair <- function(x) {
 #' @return "as-is" html output, to be rendered when knitted
 #'
 #' @importFrom purrr map
+#' @importFrom knitr knit_print
 #'
+#' @method knit_print with_flair
 #' @export
 knit_print.with_flair <- function(x, ...) {
 
@@ -161,3 +163,12 @@ print.with_flair <- function(x, ...) {
 
 }
 
+
+#' Method check
+#'
+#' @param x An object
+#'
+#' @return Whether the object is a \code{with_flair} class object.
+#'
+#' @export
+is.with_flair <- function(x) inherits(x, "with_flair")
