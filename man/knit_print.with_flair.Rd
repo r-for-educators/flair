@@ -4,7 +4,7 @@
 \alias{knit_print.with_flair}
 \title{S3 method for knitting a \code{with_flair} object}
 \usage{
-knit_print.with_flair(x, ...)
+\method{knit_print}{with_flair}(x, ...)
 }
 \arguments{
 \item{x}{A \code{with_flair} object.}
