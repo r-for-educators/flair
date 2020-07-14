@@ -16,13 +16,13 @@ knitted R Markdown files.
 
 ## Installation
 
-<!-- You can install the released version of flair from [CRAN](https://CRAN.R-project.org) with: -->
+You can install the released version of flair from [CRAN](https://CRAN.R-project.org) with: 
 
-<!-- ``` r -->
+``` r
 
-<!-- install.packages("flair") -->
+install.packages("flair")
 
-<!-- ``` -->
+```
 
 You can install the development version from
 [GitHub](https://github.com/) with:
@@ -31,6 +31,8 @@ You can install the development version from
 # install.packages("devtools")
 devtools::install_github("kbodwin/flair")
 ```
+
+(Note that only the development version of `flair` will work with R 4.0.)
 
 ## Introduction
 
@@ -41,6 +43,8 @@ library(ggplot2)
 ```
 
 **Important**:  This ReadMe shows the basic usage, but the resultant formatting cannot be displayed outside of an html document.  Please reference the Pkgdown site at [https://kbodwin.github.io/flair/index.html](https://kbodwin.github.io/flair/index.html) for full examples.
+
+For using `flair` with python, [see this example by Tiffany Timbers](https://github.com/ttimbers/python_flair)
 
 It is common to show source code, in addition to code output, as part of
 a conference talk, workshop, or lecture. Often, we want to call
