@@ -1,0 +1,111 @@
+---
+title: "Adding flair to your Python code"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Adding flair to your Python code}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, message = FALSE}
+library(flair)
+library(ggplot2)
+library(reticulate)
+```
+
+This is a demo of how to use `flair` with Python (and `reticulate`) in an R Markdown document. 
+
+Just like R, you can use Python in `.Rmd` files! All you need to do is specify `{python}` instead of `{r}` in  when you set up your R Markdown code chunk. In the first code chunk below we `import` the `pandas` Python package.
+
+#### Import Python packages
+
+```{python packages, include = FALSE}
+import pandas as pd
+```
+
+```{r, echo = FALSE}
+decorate("packages") %>% 
+  flair("import")
+```
+
+To add "flair" to our Python code above we create another code chunk, this time using a R engine. In that, we used `flair::decorate("code_chunk_name")` to reference the Python code chunk (here `"packages"`), just as you would if you were using an R engine. We also used `flair::flair("code_to_decorate")` to color the code we wished to color (here `"import"`):
+
+```{r, eval = FALSE}
+decorate("packages") %>% 
+  flair("import")
+```
+
+Normally we would set the above R code chunk option to `echo = FALSE` so that this code is not printed out, we however opted to intentionally print it out here for the purposes of illustrating how the `flair` package works.
+
+#### Load data
+
+Let's use `pd.read_csv` to load the titanic data and view the top of the data set:
+
+```{python load_data, include=FALSE}
+titanic  = pd.read_csv("data/titanic.csv")
+titanic.head()
+```
+
+```{r, echo = FALSE}
+decorate("load_data") %>% 
+  flair("pd.read_csv", background = "pink")
+```
+
+Here we used `flair` to add pink "flair" to highlight the function we are using to load the data in Python:
+
+```{r, eval = FALSE}
+decorate("load_data") %>% 
+  flair("pd.read_csv", background = "pink")
+```
+
+### Visualize the data
+
+To create a scatter plot, we can pass the Python data frame into `ggplot` using `py$data_frame` syntax inside a code chunk that this time usees a R engine to make a scatter plot (what can I say, I love `ggolot2`...):
+
+```{r viz, warning = FALSE, fig.height=4, fig.width=4, include=FALSE}
+ggplot2::ggplot(py$titanic, aes(x = age, y = fare)) +
+  geom_point()
+```
+
+```{r, echo = FALSE, warning = FALSE}
+decorate("viz") %>% 
+  flair("ggplot(py$titanic, aes(x = age, y = fare))", background = "pink") %>% 
+  flair("py$titanic", color = "CornflowerBlue")
+```
+
+Here we used `flair` to add pink "flair" to highlight the function call to `ggplot`, as well as blue font to highlight the key part of the syntax that allows us to pass the Python data frame to R:
+
+```{r, eval = FALSE}
+decorate("viz") %>% 
+  flair("ggplot(py$titanic, aes(x = age, y = fare))", background = "pink") %>% 
+  flair("py$titanic", color = "CornflowerBlue")
+```
+
+### And inline code within markdown text!
+
+The last thing we do is find the destination of the first passenger:
+
+```{python first destination, include=FALSE}
+first_dest = titanic["home.dest"][0]
+```
+
+```{r, echo = FALSE}
+decorate("first destination") %>% 
+  flair('titanic["home.dest"][0]', background = "yellow")
+```
+
+The destination of the first passenger is `r py$first_dest`.
+
+Here we used `flair` to add yellow "flair" to highlight how we numerically index the `pandas` data frame to get the first passenger's destination (fun fact - Python starts counting from 0). We then used inline code to print out the destination within the formatted markdown text in the sentence above.
+
+```{r, eval = FALSE}
+decorate("first destination") %>% 
+  flair('titanic["home.dest"][0]', background = "yellow")
+```
