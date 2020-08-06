@@ -2,7 +2,8 @@
 
 ## New features
 
-
+- `txt_style()` now accepts a `class` argument specifying a vector of classes to
+  be applied to the `<span>` of the decorated text (@gadenbuie, #18).
 
 ## Bugs and fixes
 
