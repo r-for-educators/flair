@@ -1,5 +1,5 @@
 Package: flair
-Title: Highlight, Annotate, and Format your R Source Code
+Title: Highlight, Annotate, and Format Your R Source Code
 Version: 0.0.2
 Authors@R: 
     c(person(given = "Kelly",
