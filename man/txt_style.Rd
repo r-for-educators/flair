@@ -20,6 +20,7 @@ txt_style(
   bold = FALSE,
   underline = FALSE,
   italics = FALSE,
+  class = NULL,
   ...
 )
 
@@ -55,6 +56,8 @@ txt_tag(x, before, after)
 
 \item{italics}{Should the text be italicized?}
 
+\item{class}{CSS classes applied to the `<span>` tag wrapping the text.}
+
 \item{...}{various display options: any html CSS \code{style} options, or one
 of \code{font}, \code{size}, \code{color}, \code{background}, \code{style}.}
 
@@ -77,7 +80,8 @@ A string containing \code{x} with html wrappers.
 }
 \description{
 \code{txt_style} adds appropriate html style wrappers to a string.
-Any number of options can be specified, as long as they match html CSS tags names.
+Any number of options can be specified, as long as they match html CSS
+property names.
 }
 \details{
 \code{txt_*} are shortcuts for specific individual style options
@@ -97,6 +101,9 @@ txt_color("I am blue.", color = "blue")
 
 # Code styling wrapper
 txt_tocode("I am code.")
+
+# Can also use classes
+txt_style("I am danger", class = "text-danger")
 
 }
 \seealso{

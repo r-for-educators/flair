@@ -1,7 +1,8 @@
 #' Wraps text in html or latex code for formatting
 #'
 #' \code{txt_style} adds appropriate html style wrappers to a string.
-#' Any number of options can be specified, as long as they match html CSS tags names.
+#' Any number of options can be specified, as long as they match html CSS
+#' property names.
 #'
 #' \code{txt_*} are shortcuts for specific individual style options
 #'
@@ -16,6 +17,7 @@
 #' @param underline Should the text be underlined?
 #' @param italics Should the text be italicized?
 #' @param font A valid font family.
+#' @inheritParams wrap_html
 #' @param ... various display options: any html CSS \code{style} options, or one
 #' of \code{font}, \code{size}, \code{color}, \code{background}, \code{style}.
 #'
@@ -37,10 +39,14 @@
 #' # Code styling wrapper
 #' txt_tocode("I am code.")
 #'
+#' # Can also use classes
+#' txt_style("I am danger", class = "text-danger")
+#'
 #' @export
 txt_style <- function(x,
                       type = "html",
                       bold = FALSE, underline = FALSE, italics = FALSE,
+                      class = NULL,
                       ...) {
 
   # Dots to list
@@ -49,7 +55,7 @@ txt_style <- function(x,
   # If html to correct <span> options
   if (type == "html") {
 
-    if (length(my_opts) != 0) {
+    if (length(my_opts) != 0 || !is.null(class)) {
 
       # replacements to pass to str_replace
       opts_to_html = c("^size" = "font-size",
@@ -64,15 +70,15 @@ txt_style <- function(x,
 
       # check for bold, italics, underline
 
-      if (bold) { my_opts <- c(my_opts, "bold" = "text-weight") }
+      if (bold) { my_opts <- c(my_opts, "text-weight" = "bold") }
 
-      if (italics) { my_opts <- c(my_opts, "italics" = "text-style") }
+      if (italics) { my_opts <- c(my_opts, "text-style" = "italics") }
 
-      if (underline) { my_opts <- c(my_opts, "underline" = "text-decoration") }
+      if (underline) { my_opts <- c(my_opts, "text-decoration" = "underline") }
 
 
       # put all options into <span>
-      x <- wrap_html(x, my_opts)
+      x <- wrap_html(x, my_opts, class = class)
 
     } #if options exist
 

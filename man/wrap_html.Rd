@@ -4,7 +4,7 @@
 \alias{wrap_html}
 \title{Wraps text in html for formatting}
 \usage{
-wrap_html(x, opts_list, type = "html")
+wrap_html(x, opts_list, type = "html", class = NULL)
 }
 \arguments{
 \item{x}{The string to be wrapped}
@@ -13,6 +13,8 @@ wrap_html(x, opts_list, type = "html")
 
 \item{type}{The style of display, defaults to "html"
 (currently nothing else is supported, sorry)}
+
+\item{class}{CSS classes applied to the `<span>` tag wrapping the text.}
 }
 \description{
 \code{wrap_html} returns a string with styling wrappers from a list of style
