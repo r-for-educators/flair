@@ -42,7 +42,7 @@ library(dplyr)
 library(ggplot2)
 ```
 
-**Important**:  This ReadMe shows the basic usage, but the resultant formatting cannot be displayed outside of an html document.  Please reference the Pkgdown site at [https://kbodwin.github.io/flair/index.html](https://kbodwin.github.io/flair/index.html) for full examples.
+**Important**:  This ReadMe shows the basic usage, but the resultant formatting cannot be displayed outside of an html document.  Please reference the Pkgdown site at [https://r-for-educators.github.io/flair/index.html](https://r-for-educators.github.io/flair/index.html) for full examples.
 
 For using `flair` with python, [see this example by Tiffany Timbers](https://github.com/ttimbers/python_flair)
 
