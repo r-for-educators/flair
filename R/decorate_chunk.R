@@ -165,6 +165,8 @@ decorate_chunk <- function(chunk_name,
 
   attr(knitted, "orig_chunk_text") <- my_code
 
+  attr(knitted, "engine") <- my_engine
+
   return(knitted)
 
 }
