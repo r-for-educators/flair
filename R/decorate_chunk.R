@@ -67,7 +67,7 @@ decorate_chunk <- function(chunk_name,
     }
     # Remove the label from the chunk options. Required for properly forming
     # my_code below.
-    my_opts <- within(my_opts, rm(label))
+    my_opts <- within(my_opts, rm("label"))
 
 
   } else if (is_live) {  # If that failed, try the editor pull
@@ -145,7 +145,7 @@ decorate_chunk <- function(chunk_name,
       } else {
 
         my_engine <- my_opts[["engine"]]
-        my_opts <- within(my_opts, rm(engine))
+        my_opts <- within(my_opts, rm("engine"))
 
       }
 
