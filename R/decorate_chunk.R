@@ -58,7 +58,7 @@ decorate_chunk <- function(chunk_name,
     # chunk label before rendering with knit_child
     my_label <- paste0(my_opts[["label"]], "-flaired")
     # If the same chunk is decorated twice, or if the user by chance has labeled
-    # a chunk of the same name plys "-flaired", add a random string to ensure
+    # a chunk of the same name plus "-flaired", add a random string to ensure
     # uniqueness
     if (my_label %in% knitr::all_labels()) {
       random <- sample(c(0:9, letters), 7, replace = TRUE)
