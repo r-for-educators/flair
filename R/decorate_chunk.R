@@ -54,8 +54,21 @@ decorate_chunk <- function(chunk_name,
 
     my_opts <- as.list(attributes(try_chunk$result)$chunk_opts)
 
-    # labels mess up knit_child
+    # Avoid knitr's duplicate chunk label error by appending "-flaired" to the
+    # chunk label before rendering with knit_child
+    my_label <- paste0(my_opts[["label"]], "-flaired")
+    # If the same chunk is decorated twice, or if the user by chance has labeled
+    # a chunk of the same name plys "-flaired", add a random string to ensure
+    # uniqueness
+    if (my_label %in% knitr::all_labels()) {
+      random <- sample(c(0:9, letters), 7, replace = TRUE)
+      random <- paste(random, collapse = "")
+      my_label <- paste0(my_label, "-", random)
+    }
+    # Remove the label from the chunk options. Required for properly forming
+    # my_code below.
     my_opts <- within(my_opts, rm(label))
+
 
   } else if (is_live) {  # If that failed, try the editor pull
 
@@ -140,12 +153,12 @@ decorate_chunk <- function(chunk_name,
 
       if (length(my_opts) > 1) {
 
-        my_code <- paste0("```{", my_engine, ", ",
+        my_code <- paste0("```{", my_engine, " ", my_label, ", ",
                           toString(list_to_strings(my_opts)),
                           "}\n", my_code, "\n```")
       } else {
 
-        my_code <- paste0("```{", my_engine, "}\n", my_code, "\n```")
+        my_code <- paste0("```{", my_engine,  " ", my_label, "}\n", my_code, "\n```")
 
       }
 
