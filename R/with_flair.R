@@ -40,8 +40,8 @@ knit_print.with_flair <- function(x, ...) {
   }
 
   where_sources <- map(x, ~attr(.x, "class")) == "source"
-
-  x[where_sources] <- map(x[where_sources], function(src) prep_source(src, doc_type))
+  src_type = attr(x, "engine")
+  x[where_sources] <- map(x[where_sources], function(src) prep_source(src, doc_type, src_type))
 
   x <- stringr::str_c(unlist(x), collapse = "\n")
 
@@ -56,7 +56,7 @@ knit_print.with_flair <- function(x, ...) {
 #'
 #' @return Properly wrapped text.
 #'
-prep_source <- function(x, doc_type = "unknown") {
+prep_source <- function(x, doc_type = "unknown", src_type = "unknown") {
 
   x <- stringr::str_trim(x) %>%
     stringr::str_replace_all("(?<=\\s) ", "&nbsp;")
@@ -87,7 +87,7 @@ prep_source <- function(x, doc_type = "unknown") {
 
   } else if (doc_type == "html_document") {
 
-    x <- paste0("<pre class='prettyprint'>", txt_tocode(x), "</pre>")
+    x <- paste0("<pre class='prettyprint ", src_type, "'>", txt_tocode(x), "</pre>")
 
   } else if (doc_type == "ioslides_presentation") {
 
