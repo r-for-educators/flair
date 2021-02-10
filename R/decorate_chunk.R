@@ -178,6 +178,8 @@ decorate_chunk <- function(chunk_name,
 
   attr(knitted, "orig_chunk_text") <- my_code
 
+  attr(knitted, "chunk_name") <- chunk_name
+
   return(knitted)
 
 }

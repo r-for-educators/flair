@@ -78,6 +78,8 @@ decorate_code <- function(text, ...) {
 
     attr(knitted, "orig_code_text") <- text
 
+    attr(knitted, "chunk_name") <- NA
+
     return(knitted)
 
   }
