@@ -12,7 +12,7 @@ test_that("flair_lines works on decorated objects", {
   test_wf <- decorate_code('ggplot(iris, aes(x = Sepal.Length)) +
   geom_histogram()', eval = FALSE)
 
-  test_result <- flair_lines(test_wf, c(2:4))
+  test_result <- flair_lines(test_wf, 2)
 
   good_str <- "ggplot(iris, aes(x = Sepal.Length)) +<br><span style='background-color:#ffff7f'>  geom_histogram()</span>"
 

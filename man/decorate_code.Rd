@@ -2,7 +2,7 @@
 % Please edit documentation in R/decorate_code.R
 \name{decorate_code}
 \alias{decorate_code}
-\title{Creates an object of the class \code{with_flair}}
+\title{Creates an object of the class \code{decorated}}
 \usage{
 decorate_code(text, ...)
 }
@@ -12,10 +12,10 @@ decorate_code(text, ...)
 \item{...}{Any number of default chunk options to override.}
 }
 \value{
-A \code{with_flair} object.
+A \code{decorated} object.
 }
 \description{
-Creates an object of the class \code{with_flair}
+Creates an object of the class \code{decorated}
 }
 \examples{
 

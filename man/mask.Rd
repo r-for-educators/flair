@@ -3,7 +3,7 @@
 \name{mask}
 \alias{mask}
 \alias{mask_rx}
-\alias{mask_rx.with_flair}
+\alias{mask_rx.decorated}
 \alias{mask_rx.default}
 \alias{mask_quick}
 \title{Blanks out part of the string}
@@ -12,14 +12,14 @@ mask(x, pattern, before = NULL, after = NULL, ...)
 
 mask_rx(x, pattern, before = NULL, after = NULL, ...)
 
-\method{mask_rx}{with_flair}(x, pattern, before = NULL, after = NULL, ...)
+\method{mask_rx}{decorated}(x, pattern, before = NULL, after = NULL, ...)
 
 \method{mask_rx}{default}(x, pattern, before = NULL, after = NULL, ...)
 
 mask_quick(x, pattern, before = NULL, after = NULL, ...)
 }
 \arguments{
-\item{x}{A string object or \code{\link{decorate_code}} object.}
+\item{x}{A string object or \code{\link{decorated}} object.}
 
 \item{pattern}{A pattern to match}
 
@@ -32,7 +32,7 @@ mask_quick(x, pattern, before = NULL, after = NULL, ...)
 \description{
 Blanks out part of the string
 
-S3 method for \code{\link{with_flair}} objects
+S3 method for \code{\link{decorated}} objects
 
 Default S3 method for \code{\link{flair_rx}}.
 }
