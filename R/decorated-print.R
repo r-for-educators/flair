@@ -21,7 +21,9 @@ decorated <- function(x) {
 #' @return "as-is" html output, to be rendered when knitted
 #'
 #' @importFrom purrr map
+#' @importFrom knitr knit_print
 #'
+#' @method knit_print decorated
 #' @export
 knit_print.decorated <- function(x, ...) {
 
@@ -161,3 +163,12 @@ print.decorated <- function(x, ...) {
 
 }
 
+
+#' Method check
+#'
+#' @param x An object
+#'
+#' @return Whether the object is a \code{decorated} class object.
+#'
+#' @export
+is.decorated <- function(x) inherits(x, "decorated")

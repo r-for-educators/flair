@@ -4,7 +4,7 @@
 \alias{knit_print.decorated}
 \title{S3 method for knitting a \code{decorated} object}
 \usage{
-knit_print.decorated(x, ...)
+\method{knit_print}{decorated}(x, ...)
 }
 \arguments{
 \item{x}{A \code{decorated} object.}
