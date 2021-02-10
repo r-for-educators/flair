@@ -87,7 +87,7 @@ property names.
 \code{txt_*} are shortcuts for specific individual style options
 
 Warning: These are simple direct wrappers for strings only.  If you are using
-\code{\link{with_flair}} objects, you should instead use the
+\code{\link{decorated}} objects, you should instead use the
 \code{\link{flair}} functions.
 }
 \examples{

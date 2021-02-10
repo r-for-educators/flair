@@ -8,7 +8,7 @@ This is line 4.'
 })
 
 
-test_that("flair_lines works on with_flair objects", {
+test_that("flair_lines works on decorated objects", {
   test_wf <- decorate_code('ggplot(iris, aes(x = Sepal.Length)) +
   geom_histogram()', eval = FALSE)
 
@@ -18,5 +18,5 @@ test_that("flair_lines works on with_flair objects", {
 
   expect_equal(test_result[[2]]$src, good_str)
   expect_equal(class(test_result[[2]]), "source")
-  expect_equal(class(test_result), "with_flair")
+  expect_equal(class(test_result), "decorated")
 })

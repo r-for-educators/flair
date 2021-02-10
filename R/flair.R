@@ -4,12 +4,12 @@
 #'
 #' If input is a string object, \code{flair} returns a formatted string.
 #'
-#' If input is a \code{\link{with_flair}} object, \code{flair} returns a
-#'  \code{\link{with_flair}} object with the source elements formatted.
+#' If input is a \code{\link{decorated}} object, \code{flair} returns a
+#'  \code{\link{decorated}} object with the source elements formatted.
 #'
 #' Currently, \code{flair} is only built for html formatting.
 #'
-#' @param x A string or \code{\link{with_flair}} object
+#' @param x A string or \code{\link{decorated}} object
 #' @param pattern A pattern to match.  By default, this is a fixed pattern;
 #' use \code{flair_rx} for regular expressions.
 #' @param before String giving specific html tags to insert before matched text.
@@ -48,12 +48,12 @@ flair_rx <- function(x, pattern,
   UseMethod("flair_rx")
 }
 
-#' S3 method for \code{\link{with_flair}} objects
+#' S3 method for \code{\link{decorated}} objects
 #'
 #' @importFrom purrr map
 #' @rdname flair
 #' @export
-flair_rx.with_flair = function(x, pattern,
+flair_rx.decorated = function(x, pattern,
                                before = NULL, after = NULL,
                                ...) {
 
@@ -68,7 +68,7 @@ flair_rx.with_flair = function(x, pattern,
   x[where_sources] <- purrr::map(x[where_sources],
                                  function(x) structure(list(src = x), class = "source"))
 
-  attr(x, "class") <- "with_flair"
+  attr(x, "class") <- "decorated"
 
   return(x)
 
@@ -159,7 +159,7 @@ flair_all.default <- function(x, ...) {
 
 #' @rdname flair
 #' @export
-flair_all.with_flair <- function(x, ...) {
+flair_all.decorated <- function(x, ...) {
 
   where_sources <-  map(x, ~attr(.x, "class")) == "source"
 
@@ -171,7 +171,7 @@ flair_all.with_flair <- function(x, ...) {
   x[where_sources] <- purrr::map(x[where_sources],
                                  function(x) structure(list(src = x), class = "source"))
 
-  attr(x, "class") <- "with_flair"
+  attr(x, "class") <- "decorated"
 
   return(x)
 

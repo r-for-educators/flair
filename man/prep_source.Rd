@@ -2,7 +2,7 @@
 % Please edit documentation in R/with_flair.R
 \name{prep_source}
 \alias{prep_source}
-\title{Helper for \code{knit_print.with_flair}}
+\title{Helper for \code{knit_print.decorated}}
 \usage{
 prep_source(x, doc_type = "unknown")
 }
@@ -15,5 +15,5 @@ prep_source(x, doc_type = "unknown")
 Properly wrapped text.
 }
 \description{
-Helper for \code{knit_print.with_flair}
+Helper for \code{knit_print.decorated}
 }

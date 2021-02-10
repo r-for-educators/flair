@@ -3,9 +3,9 @@
 #'
 #' \code{flair_lines} returns a string with formatting wrappers(currently only
 #' html), or applies the formatting to the source elements of a
-#' \code{\link{with_flair}} object.
+#' \code{\link{decorated}} object.
 #'
-#' @param x A string or \code{\link{with_flair}} object
+#' @param x A string or \code{\link{decorated}} object
 #' @param lines Integer vector indicating which lines to apply the flair styling to.
 # @param ... Formatting style options, passed to \code{\link{txt_style}}
 #'
@@ -38,21 +38,21 @@ flair_lines.default <- function(x, lines) {
 
 }
 
-#' S3 method for \code{\link{with_flair}} objects
+#' S3 method for \code{\link{decorated}} objects
 #'
 #' Applies flair to the appropriate line(s) of source code.
 #'
-#' @param x An object of class \code{\link{with_flair}}.
+#' @param x An object of class \code{\link{decorated}}.
 #' @param lines An integer vector specifying code lines to highlight.
 # @param ... Formatting style options, passed to \code{\link{txt_style}}
 #'
-#' @return An object of class \code{\link{with_flair}}.
+#' @return An object of class \code{\link{decorated}}.
 #'
 #' @importFrom stringr str_split str_trim str_remove_all
 #' @importFrom purrr map map2
 #'
 #' @export
-flair_lines.with_flair <- function(x, lines) {
+flair_lines.decorated <- function(x, lines) {
 
   where_sources <-  map(x, ~attr(.x, "class")) == "source"
 
@@ -74,7 +74,7 @@ flair_lines.with_flair <- function(x, lines) {
 
   #x <- c(x, script)
 
-  attr(x, "class") <- "with_flair"
+  attr(x, "class") <- "decorated"
 
   return(x)
 

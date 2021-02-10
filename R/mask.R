@@ -23,12 +23,12 @@ mask_rx <- function(x, pattern,
   UseMethod("mask_rx")
 }
 
-#' S3 method for \code{\link{with_flair}} objects
+#' S3 method for \code{\link{decorated}} objects
 #'
 #' @importFrom purrr map
 #' @rdname mask
 #' @export
-mask_rx.with_flair = function(x, pattern,
+mask_rx.decorated = function(x, pattern,
                                before = NULL, after = NULL,
                                ...) {
 
@@ -43,7 +43,7 @@ mask_rx.with_flair = function(x, pattern,
   x[where_sources] <- purrr::map(x[where_sources],
                                  function(x) structure(list(src = x), class = "source"))
 
-  attr(x, "class") <- "with_flair"
+  attr(x, "class") <- "decorated"
 
   return(x)
 

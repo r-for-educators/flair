@@ -113,10 +113,10 @@
 <p>Without <code>flair</code>, your approach might be to type your code into your code chunk, copy-paste it to a string, and manually format that string using html to add the background highlighting to the pipes. What a headache!</p>
 <p>In this vignette, we will show you how to use the <code>flair</code> package to add decorative formatting to your source code.</p>
 </div>
-<div id="with_flair-objects" class="section level2">
+<div id="decorated-objects" class="section level2">
 <h2 class="hasAnchor">
-<a href="#with_flair-objects" class="anchor"></a><code>with_flair</code> Objects</h2>
-<p>The core element of the package is an object of the class <code>with_flair</code>. These objects contain both the natural output of your R code and your flaired-up source code.</p>
+<a href="#decorated-objects" class="anchor"></a><code>decorated</code> Objects</h2>
+<p>The core element of the package is an object of the class <code>decorated</code>. These objects contain both the natural output of your R code and your flaired-up source code.</p>
 <div id="decorating-a-code-chunk" class="section level3">
 <h3 class="hasAnchor">
 <a href="#decorating-a-code-chunk" class="anchor"></a>Decorating a code chunk</h3>
@@ -229,7 +229,7 @@ decorate("how_to_pipe") %&gt;%
 <div id="the-flair_-functions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#the-flair_-functions" class="anchor"></a>The <code>flair_*</code> functions</h2>
-<p>The advantage of a <code>with_flair</code> object is that you can add formatting to the source code without altering the output. This decorative formatting is specified through the suite of <code>flair</code> functions</p>
+<p>The advantage of a <code>decorated</code> object is that you can add formatting to the source code without altering the output. This decorative formatting is specified through the suite of <code>flair</code> functions</p>
 <div id="flair" class="section level3">
 <h3 class="hasAnchor">
 <a href="#flair" class="anchor"></a>flair</h3>
@@ -240,7 +240,7 @@ decorate("how_to_pipe") %&gt;%
 <li><p>Any number of formatting parameters</p></li>
 </ul>
 <p>If no formatting parameters are supplied, <code>flair_*</code> will default to ordinary yellow-background highlighting.</p>
-<p><code>flair</code> returns a <code>with_flair</code> object, so it is pipe friendly!</p>
+<p><code>flair</code> returns a <code>decorated</code> object, so it is pipe friendly!</p>
 <p>Refer back to the <code>how_to_pipe</code> chunk above. Suppose you want to highlight the pipe operator (<code><a href="../reference/pipe.html">%&gt;%</a></code>) in yellow, highlight the variable name <code>Sepal.Length</code> in pink, and change the text color of <code>Species</code> to blue</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="kw"><a href="../reference/decorate.html">decorate</a></span>(<span class="st">'how_to_pipe'</span>) <span class="op">%&gt;%</span></span>
 <span id="cb16-2"><a href="#cb16-2"></a><span class="st">  </span><span class="kw"><a href="../reference/flair.html">flair</a></span>(<span class="st">"%&gt;%"</span>) <span class="op">%&gt;%</span></span>
@@ -348,7 +348,7 @@ decorate("how_to_pipe") %&gt;%
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#introduction">Introduction</a></li>
-      <li><a href="#with_flair-objects"><code>with_flair</code> Objects</a></li>
+      <li><a href="#decorated-objects"><code>decorated</code> Objects</a></li>
       <li><a href="#the-flair_-functions">The <code>flair_*</code> functions</a></li>
       <li><a href="#errata">Errata</a></li>
       </ul>

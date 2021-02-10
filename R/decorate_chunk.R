@@ -1,4 +1,4 @@
-#' Builds a \code{\link{with_flair}} object from a code chunk
+#' Builds a \code{\link{decorated}} object from a code chunk
 #'
 #' This function reads the source code from a given named code chunk;
 #' i.e., \code{{r chunk_name, echo = FALSE}}.
@@ -20,7 +20,7 @@
 #'
 #' @param ...  Any number of other chunk options to override.
 #'
-#' @return An object of class \code{\link{with_flair}}
+#' @return An object of class \code{\link{decorated}}
 #'
 #' @importFrom stringr str_c str_trim str_remove_all
 #'
@@ -131,7 +131,7 @@ decorate_chunk <- function(chunk_name,
     if (!is.null(my_opts$flair) && !my_opts$flair) {
 
       placeholder <- list(NULL)
-      attr(placeholder, "class") = "with_flair"
+      attr(placeholder, "class") = "decorated"
 
       return(placeholder)
 
@@ -174,9 +174,11 @@ decorate_chunk <- function(chunk_name,
 
   where_sources <-  map(knitted, ~attr(.x, "class")) == "source"
 
-  attr(knitted, "class") <- "with_flair"
+  attr(knitted, "class") <- "decorated"
 
   attr(knitted, "orig_chunk_text") <- my_code
+
+  attr(knitted, "chunk_name") <- chunk_name
 
   return(knitted)
 
