@@ -47,9 +47,9 @@ Without `flair`, your approach might be to type your code into your code chunk, 
 
 In this vignette, we will show you how to use the `flair` package to add decorative formatting to your source code.
 
-## `with_flair` Objects
+## `decorated` Objects
 
-The core element of the package is an object of the class `with_flair`.  These objects contain both the natural output of your R code and your flaired-up source code.
+The core element of the package is an object of the class `decorated`.  These objects contain both the natural output of your R code and your flaired-up source code.
 
 
 ### Decorating a code chunk
@@ -179,7 +179,7 @@ decorate_chunk('how_to_pipe') %>%
 
 ## The `flair_*` functions
 
-The advantage of a `with_flair` object is that you can add formatting to the source code without altering the output.  This decorative formatting is specified through the suite of `flair` functions
+The advantage of a `decorated` object is that you can add formatting to the source code without altering the output.  This decorative formatting is specified through the suite of `flair` functions
 
 ### flair
 
@@ -193,7 +193,7 @@ The main function you will use is simply `flair()`.  This takes as arguments:
 
 If no formatting parameters are supplied, `flair_*` will default to ordinary yellow-background highlighting.
 
-`flair` returns a `with_flair` object, so it is pipe friendly!
+`flair` returns a `decorated` object, so it is pipe friendly!
 
 Refer back to the `how_to_pipe` chunk above.  Suppose you want to highlight the pipe operator (`%>%`) in yellow, highlight the variable name `Sepal.Length` in pink, and change the text color of `Species` to blue
 

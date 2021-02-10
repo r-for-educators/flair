@@ -11,7 +11,7 @@ flair_lines(x, lines)
 \method{flair_lines}{default}(x, lines)
 }
 \arguments{
-\item{x}{A string or \code{\link{with_flair}} object}
+\item{x}{A string or \code{\link{decorated}} object}
 
 \item{lines}{Integer vector indicating which lines to apply the flair styling to.}
 }
@@ -21,7 +21,7 @@ A string with formatting wrappers.
 \description{
 \code{flair_lines} returns a string with formatting wrappers(currently only
 html), or applies the formatting to the source elements of a
-\code{\link{with_flair}} object.
+\code{\link{decorated}} object.
 }
 \examples{
 

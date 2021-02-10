@@ -1,21 +1,21 @@
-#' Create a \code{with_flair} object
+#' Create a \code{decorated} object
 #'
 #' (The preferred function is \code{\link{decorate}})
 #'
 #' @param x A text object or code chunk label
 #'
-#' @return An object of class \code{with_flair}
+#' @return An object of class \code{decorated}
 #'
 #' @export
-with_flair <- function(x) {
+decorated <- function(x) {
 
   decorate(x)
 
 }
 
-#' S3 method for knitting a \code{with_flair} object
+#' S3 method for knitting a \code{decorated} object
 #'
-#' @param x A \code{with_flair} object.
+#' @param x A \code{decorated} object.
 #' @param ... Other \code{knit_print} options
 #'
 #' @return "as-is" html output, to be rendered when knitted
@@ -23,9 +23,9 @@ with_flair <- function(x) {
 #' @importFrom purrr map
 #' @importFrom knitr knit_print
 #'
-#' @method knit_print with_flair
+#' @method knit_print decorated
 #' @export
-knit_print.with_flair <- function(x, ...) {
+knit_print.decorated <- function(x, ...) {
 
   get_doc_type <- purrr::safely(rmarkdown::all_output_formats)(knitr::current_input())
 
@@ -50,7 +50,7 @@ knit_print.with_flair <- function(x, ...) {
 
 }
 
-#' Helper for \code{knit_print.with_flair}
+#' Helper for \code{knit_print.decorated}
 #' @param x Text of source code.
 #' @param doc_type Document type to knit to.
 #'
@@ -120,16 +120,16 @@ prep_source <- function(x, doc_type = "unknown") {
 }
 
 
-#' When run interactively, a \code{with_flair} object should preview the
+#' When run interactively, a \code{decorated} object should preview the
 #' flaired source code in the viewer pane. (Only if in RStudio.)
 #'
-#' @param x A \code{with_flair} object.
+#' @param x A \code{decorated} object.
 #' @param ... Other \code{print} options
 #'
 #' @return None
 #'
 #' @export
-print.with_flair <- function(x, ...) {
+print.decorated <- function(x, ...) {
 
   editorIsOpen <- tryCatch({
     rstudioapi::getSourceEditorContext()
@@ -168,7 +168,7 @@ print.with_flair <- function(x, ...) {
 #'
 #' @param x An object
 #'
-#' @return Whether the object is a \code{with_flair} class object.
+#' @return Whether the object is a \code{decorated} class object.
 #'
 #' @export
-is.with_flair <- function(x) inherits(x, "with_flair")
+is.decorated <- function(x) inherits(x, "decorated")

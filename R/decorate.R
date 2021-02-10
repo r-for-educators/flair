@@ -1,5 +1,5 @@
 
-#' Builds a \code{\link{with_flair}} object from either a code chunk or a
+#' Builds a \code{\link{decorated}} object from either a code chunk or a
 #' string object containing source code.
 #'
 #' \code{decorate} does its best to guess if it has been given a code string or
@@ -8,7 +8,7 @@
 #' @param x A string, containing either a chunk label or R code.
 #' @param ... Chunk options to pass along
 #'
-#' @return A \code{with_flair} object.
+#' @return A \code{decorated} object.
 #'
 #' @seealso \code{\link{decorate_chunk}}, \code{\link{decorate_code}}
 #'

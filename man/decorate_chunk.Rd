@@ -2,7 +2,7 @@
 % Please edit documentation in R/decorate_chunk.R
 \name{decorate_chunk}
 \alias{decorate_chunk}
-\title{Builds a \code{\link{with_flair}} object from a code chunk}
+\title{Builds a \code{\link{decorated}} object from a code chunk}
 \usage{
 decorate_chunk(chunk_name, eval = TRUE, echo = TRUE, include = TRUE, ...)
 }
@@ -21,7 +21,7 @@ behaves identically to ordinary \code{knitr} code chunk option \code{include}}
 \item{...}{Any number of other chunk options to override.}
 }
 \value{
-An object of class \code{\link{with_flair}}
+An object of class \code{\link{decorated}}
 }
 \description{
 This function reads the source code from a given named code chunk;

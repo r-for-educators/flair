@@ -1,10 +1,10 @@
-#' Creates an object of the class \code{with_flair}
+#' Creates an object of the class \code{decorated}
 #'
 #' @param text A string, presumably representing R code.
 #' @param ...  Any number of default chunk options to override.
 #'
 #'
-#' @return A \code{with_flair} object.
+#' @return A \code{decorated} object.
 #'
 #' @seealso \code{\link{flair}}
 #'
@@ -51,7 +51,7 @@ decorate_code <- function(text, ...) {
   if (!is.null(my_opts$flair) && !my_opts$flair) {
 
     placeholder <- list(NULL)
-    attr(placeholder, "class") = "with_flair"
+    attr(placeholder, "class") = "decorated"
 
     return(placeholder)
 
@@ -74,7 +74,7 @@ decorate_code <- function(text, ...) {
     # convert knitted string to a list with sources separate from output
     knitted <- knitted %>% src_to_list()
 
-    attr(knitted, "class") <- "with_flair"
+    attr(knitted, "class") <- "decorated"
 
     attr(knitted, "orig_code_text") <- text
 
