@@ -20,7 +20,7 @@ test_that("flair_rx works with dots", {
 })
 
 
-test_that("flair_rx works for with_flair object", {
+test_that("flair_rx works for decorated object", {
 
   good_str = "ggplot(iris, aes(x = <span style='color:red;font-size:30px'>Sepal.Length</span>)) + geom_histogram()"
 
@@ -30,5 +30,5 @@ test_that("flair_rx works for with_flair object", {
 
   expect_equal(test_result[[2]]$src, good_str)
   expect_equal(class(test_result[[2]]), "source")
-  expect_equal(class(test_result), "with_flair")
+  expect_equal(class(test_result), "decorated")
 })
