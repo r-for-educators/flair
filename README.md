@@ -29,7 +29,7 @@ You can install the development version from
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("kbodwin/flair")
+devtools::install_github("r-for-educators/flair")
 ```
 
 (Note that only the development version of `flair` will work with R 4.0.)
