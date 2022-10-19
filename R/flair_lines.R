@@ -58,7 +58,7 @@ flair_lines.decorated <- function(x, lines) {
 
   line_nums <-
     x[where_sources] %>%
-    map(~str_count(.x, "\\n|(<br>)")) %>%
+    map(~str_count(as.character(.x), "\\n|(<br>)")) %>%
     map2(1:sum(where_sources), ~ 0:.x + .y)
 
   to_flair <- unlist(map(line_nums, ~any(.x %in% lines)))
@@ -92,7 +92,7 @@ flair_lines.decorated <- function(x, lines) {
 #' @importFrom stringr str_split str_c
 flair_sublines <- function(text, nums, lines) {
   which_lines <- which(nums %in% lines)
-  text <- text %>% str_split("\\n|(<br>)") %>% unlist()
+  text <- text %>% as.character() %>% str_split("\\n|(<br>)") %>% unlist()
   text[which_lines] <- map(text[which_lines], function(cs) flair_quick(cs, ".+"))
   text <- str_c(text, collapse = "<br>")
   return(text)

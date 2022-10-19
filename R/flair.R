@@ -93,6 +93,7 @@ flair_rx.default <- function(x, pattern,
   # rx_between <- "((?<=\\>|^)([^\\<]|(\\<(?=(\\-|\\<))))*(?=\\<|$))"
 
   split_string <- x %>%
+    as.character() %>%
     str_extract_all("(\\<[^\\<\\>]*\\>)|((?<=\\>|^)([^\\<]|(\\<(?=(\\-|\\<))))*(?=\\<|$))") %>%
     unlist()
 
