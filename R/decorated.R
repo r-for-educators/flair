@@ -70,25 +70,23 @@ print.decorated <- function(x, ...) {
     TRUE
   }, error = function(e) FALSE)
 
-  if (editorIsOpen) {
+  x_str <- format(x)
 
-    tempDir <- tempfile()
-    dir.create(tempDir)
-    htmlFile <- file.path(tempDir, "index.html")
-
-    x <- format(x)
-
-    writeLines(x, htmlFile)
-
-    viewer <- getOption("viewer")
-    viewer(htmlFile)
-
-  } else {
-
-    return()
-
+  if (!editorIsOpen) {
+    print(x_str)
+    return(invisible(x))
   }
 
+  tempDir <- tempfile()
+  dir.create(tempDir)
+  htmlFile <- file.path(tempDir, "index.html")
+
+  writeLines(x_str, htmlFile)
+
+  viewer <- getOption("viewer")
+  viewer(htmlFile)
+
+  invisible(x)
 }
 
 #' @export
