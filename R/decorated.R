@@ -36,8 +36,7 @@ as_decorated.default <- function(x, ...) {
 
 #' @export
 as_decorated.list <- function(x, ...) {
-  class(x) <- "decorated"
-  x
+  structure(x, class = "decorated")
 }
 
 #' @export
