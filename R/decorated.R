@@ -70,7 +70,7 @@ print.decorated <- function(x, ...) {
     dir.create(tempDir)
     htmlFile <- file.path(tempDir, "index.html")
 
-    where_sources <- map(x, ~attr(.x, "class")) == "source"
+    where_sources <- map_lgl(x, is.decorated_source)
 
     x <- x[where_sources]
 
@@ -117,7 +117,7 @@ knit_print.decorated <- function(x, ...) {
 
   }
 
-  where_sources <- map(x, ~attr(.x, "class")) == "source"
+  where_sources <-  map_lgl(x, is.decorated_source)
 
   x[where_sources] <- map(x[where_sources], function(src) prep_source(src, doc_type))
 

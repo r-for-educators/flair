@@ -192,7 +192,7 @@ src_to_list <- function(knitted) {
   knitted[before_code + 1] <- stringr::str_trim(knitted[before_code + 1])
 
   knitted[before_code + 1] <- purrr::map(knitted[before_code + 1],
-                                         function(x) structure(list(src = x), class = "source"))
+                                         as_decorated_source)
 
   knitted <- knitted[-c(before_code, before_code + 2)]
 

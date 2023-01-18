@@ -16,7 +16,7 @@ test_that("flair_lines works on decorated objects", {
 
   good_str <- "ggplot(iris, aes(x = Sepal.Length)) +<br><span style=\"background-color:#ffff7f\">  geom_histogram()</span>"
 
-  expect_equal(test_result[[2]]$src, good_str)
-  expect_equal(class(test_result[[2]]), "source")
-  expect_equal(class(test_result), "decorated")
+  expect_equal(unclass(test_result[[2]]), good_str)
+  expect_s3_class(test_result[[2]], "decorated_source")
+  expect_s3_class(test_result, "decorated")
 })

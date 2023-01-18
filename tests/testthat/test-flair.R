@@ -28,7 +28,7 @@ test_that("flair_rx works for decorated object", {
 
   test_result <- flair_rx(test_dc, test_regexp, color = "red", size = "30px")
 
-  expect_equal(test_result[[2]]$src, good_str)
-  expect_equal(class(test_result[[2]]), "source")
-  expect_equal(class(test_result), "decorated")
+  expect_equal(unclass(test_result[[2]]), good_str)
+  expect_s3_class(test_result[[2]], "decorated_source")
+  expect_s3_class(test_result, "decorated")
 })
