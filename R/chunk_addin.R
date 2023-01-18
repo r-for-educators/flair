@@ -40,7 +40,7 @@ add_flair_chunk  <- function(x) {
 
   chunk_params <- stringr::str_split(chunk_header, ", *")[[1]]
 
-  if (all(stringr::str_detect(chunk_params, "=")) || chunk_params == "") {
+  if (all(stringr::str_detect(chunk_params, "=")) || all(!nzchar(chunk_params))) {
     stop("Chunk must be named")
   }
 

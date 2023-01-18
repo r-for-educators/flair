@@ -134,6 +134,16 @@ sum(x)
   expect_error(
     add_flair_chunk(
       '
+```{r , , , , ,}
+sum(x)
+```
+'
+    )
+  )
+
+  expect_error(
+    add_flair_chunk(
+      '
 ```{r, eval=FALSE}
 sum(x)
 ```
