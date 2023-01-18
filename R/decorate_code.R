@@ -54,23 +54,22 @@ decorate_code <- function(text, ...) {
 
     return(placeholder)
 
+  }
+
+  my_code_fenced <- paste0("```{r}\n", text, "\n```")
+
+  if (is_live) {
+
+    knitted <- knitr::knit(text = my_code_fenced,
+                           quiet = TRUE)
+
   } else {
 
-    my_code_fenced <- paste0("```{r}\n", text, "\n```")
-
-    if (is_live) {
-
-      knitted <- knitr::knit(text = my_code_fenced,
-                             quiet = TRUE)
-
-    } else {
-
-      knitted <- knitr::knit_child(text = my_code_fenced,
-                                   options = my_opts,
-                                   quiet = TRUE)
-    }
-
-    new_decorated(knitted, text, NA_character_)
+    knitted <- knitr::knit_child(text = my_code_fenced,
+                                 options = my_opts,
+                                 quiet = TRUE)
   }
+
+  new_decorated(knitted, text, NA_character_)
 
 }
