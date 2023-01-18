@@ -25,7 +25,9 @@ new_decorated <- function(knitted, code = NULL, label = NULL) {
   )
 }
 
-as_decorated <- function(x, ...) UseMethod("as_decorated", x)
+as_decorated <- function(x, ...) {
+  UseMethod("as_decorated", x)
+}
 
 #' @export
 as_decorated.default <- function(x, ...) {
@@ -35,6 +37,11 @@ as_decorated.default <- function(x, ...) {
 #' @export
 as_decorated.list <- function(x, ...) {
   class(x) <- "decorated"
+  x
+}
+
+#' @export
+as_decorated.decorated <- function(x, ...) {
   x
 }
 
