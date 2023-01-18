@@ -76,11 +76,7 @@ print.decorated <- function(x, ...) {
     dir.create(tempDir)
     htmlFile <- file.path(tempDir, "index.html")
 
-    x <- purrr::keep(x, is_decorated_source)
-
-    x <- map(x, function(src) prep_source(src, doc_type = "unknown"))
-
-    x <- stringr::str_c(unlist(x), collapse = "</br>")
+    x <- format(x)
 
     writeLines(x, htmlFile)
 
@@ -93,6 +89,15 @@ print.decorated <- function(x, ...) {
 
   }
 
+}
+
+#' @export
+format.decorated <- function(x, ...) {
+  x %>%
+    purrr::keep(is_decorated_source) %>%
+    map(prep_source, doc_type = "unknown") %>%
+    unlist() %>%
+    stringr::str_c(collapse = "<br />")
 }
 
 #' S3 method for knitting a \code{decorated} object
