@@ -68,10 +68,7 @@ flair_rx.decorated = function(x, pattern,
   x[where_sources] <- purrr::map(x[where_sources],
                                  function(x) structure(list(src = x), class = "source"))
 
-  attr(x, "class") <- "decorated"
-
-  return(x)
-
+  as_decorated(x)
 }
 
 #' Default S3 method for \code{\link{flair_rx}}.
@@ -171,9 +168,7 @@ flair_all.decorated <- function(x, ...) {
   x[where_sources] <- purrr::map(x[where_sources],
                                  function(x) structure(list(src = x), class = "source"))
 
-  attr(x, "class") <- "decorated"
-
-  return(x)
+  as_decorated(x)
 
 }
 

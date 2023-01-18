@@ -74,9 +74,7 @@ flair_lines.decorated <- function(x, lines) {
 
   #x <- c(x, script)
 
-  attr(x, "class") <- "decorated"
-
-  return(x)
+  as_decorated(x)
 
 }
 

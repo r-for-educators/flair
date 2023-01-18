@@ -43,9 +43,7 @@ mask_rx.decorated = function(x, pattern,
   x[where_sources] <- purrr::map(x[where_sources],
                                  function(x) structure(list(src = x), class = "source"))
 
-  attr(x, "class") <- "decorated"
-
-  return(x)
+  as_decorated(x)
 
 }
 

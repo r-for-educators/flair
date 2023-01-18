@@ -50,8 +50,7 @@ decorate_code <- function(text, ...) {
   # Check for flair = FALSE option
   if (!is.null(my_opts$flair) && !my_opts$flair) {
 
-    placeholder <- list(NULL)
-    attr(placeholder, "class") = "decorated"
+    placeholder <- new_decorated(NULL)
 
     return(placeholder)
 
@@ -71,17 +70,7 @@ decorate_code <- function(text, ...) {
                                    quiet = TRUE)
     }
 
-    # convert knitted string to a list with sources separate from output
-    knitted <- knitted %>% src_to_list()
-
-    attr(knitted, "class") <- "decorated"
-
-    attr(knitted, "orig_code_text") <- text
-
-    attr(knitted, "chunk_name") <- NA
-
-    return(knitted)
-
+    new_decorated(knitted, text, NA_character_)
   }
 
 }
