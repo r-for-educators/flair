@@ -77,9 +77,7 @@ print.decorated <- function(x, ...) {
     dir.create(tempDir)
     htmlFile <- file.path(tempDir, "index.html")
 
-    where_sources <- map_lgl(x, is.decorated_source)
-
-    x <- x[where_sources]
+    x <- purrr::keep(x, is_decorated_source)
 
     x <- map(x, function(src) prep_source(src, doc_type = "unknown"))
 
