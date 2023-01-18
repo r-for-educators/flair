@@ -54,7 +54,7 @@ flair_lines.default <- function(x, lines) {
 #' @export
 flair_lines.decorated <- function(x, lines) {
 
-  where_sources <- map_lgl(x, is.decorated_source)
+  where_sources <- is_decorated_source(x)
 
   line_nums <-
     x[where_sources] %>%

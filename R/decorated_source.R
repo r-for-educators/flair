@@ -12,7 +12,9 @@ as_decorated_source.character <- function(x, ...) {
   structure(x, class = "decorated_source")
 }
 
-#' @export
-is.decorated_source <- function(x) {
-  inherits(x, "decorated_sour")
+is_decorated_source <- function(x) {
+  if (length(x) > 1) {
+    return(map_lgl(as.list(x), is_decorated_source))
+  }
+  inherits(x, "decorated_source")
 }
