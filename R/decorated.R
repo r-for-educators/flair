@@ -65,26 +65,9 @@ is.decorated <- function(x) inherits(x, "decorated")
 #' @export
 print.decorated <- function(x, ...) {
 
-  editorIsOpen <- tryCatch({
-    rstudioapi::getSourceEditorContext()
-    TRUE
-  }, error = function(e) FALSE)
+  x_html <- htmltools::browsable(format(x))
 
-  x_str <- format(x)
-
-  if (!editorIsOpen) {
-    print(x_str)
-    return(invisible(x))
-  }
-
-  tempDir <- tempfile()
-  dir.create(tempDir)
-  htmlFile <- file.path(tempDir, "index.html")
-
-  writeLines(x_str, htmlFile)
-
-  viewer <- getOption("viewer")
-  viewer(htmlFile)
+  print(x_html)
 
   invisible(x)
 }
