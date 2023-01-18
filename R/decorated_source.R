@@ -18,3 +18,13 @@ is_decorated_source <- function(x) {
   }
   inherits(x, "decorated_source")
 }
+
+modify_sources <- function(x, .f, ...) {
+  # The function to apply to `decorated_source` items
+  .f <- purrr::partial(purrr::as_mapper(.f), ...)
+
+  # Ensure the `decorated_source` items retain their class post-processing
+  .modify <- purrr::compose(as_decorated_source, .f)
+
+  purrr::modify_if(x, is_decorated_source, .modify)
+}

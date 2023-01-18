@@ -124,9 +124,7 @@ knit_print.decorated <- function(x, ...) {
 
   }
 
-  where_sources <-  map_lgl(x, is.decorated_source)
-
-  x[where_sources] <- map(x[where_sources], function(src) prep_source(src, doc_type))
+  x <- modify_sources(x, prep_source, doc_type = doc_type)
 
   x <- stringr::str_c(unlist(x), collapse = "\n")
 

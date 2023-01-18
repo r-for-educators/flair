@@ -31,19 +31,15 @@ mask_rx <- function(x, pattern,
 mask_rx.decorated = function(x, pattern,
                                before = NULL, after = NULL,
                                ...) {
-
-  where_sources <- map_lgl(x, is.decorated_source)
-
-  source_strings <- purrr::map(x[where_sources],
-                               function(cs) mask_rx(cs, pattern,
-                                                     before = before, after = after, ...))
-
-  x[where_sources] <- source_strings
-
-  x[where_sources] <- purrr::map(x[where_sources], as_decorated_source)
-
-  as_decorated(x)
-
+  x %>%
+    modify_sources(
+      mash_rx,
+      pattern = pattern,
+      before = before,
+      after = after,
+      ...
+    ) %>%
+    as_decorated()
 }
 
 #' Default S3 method for \code{\link{flair_rx}}.
