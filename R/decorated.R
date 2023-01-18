@@ -95,7 +95,8 @@ format.decorated <- function(x, ...) {
     purrr::keep(is_decorated_source) %>%
     map(prep_source, doc_type = "unknown") %>%
     unlist() %>%
-    stringr::str_c(collapse = "<br />")
+    stringr::str_c(collapse = "<br />") %>%
+    htmltools::HTML()
 }
 
 #' S3 method for knitting a \code{decorated} object

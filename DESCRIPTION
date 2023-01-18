@@ -25,7 +25,8 @@ Imports:
     rmarkdown,
     stringr,
     ggplot2,
-    dplyr
+    dplyr,
+    htmltools
 Suggests: 
     learnr,
     rstudioapi,
