@@ -11,9 +11,9 @@ Description: Facilitates easier formatting and highlighting of R source
     chunks, then to specify formatting details for the source code, such
     as highlighting of particular syntactical elements.
 License: MIT + file LICENSE
-URL: https://github.com/kbodwin/flair,
-    https://kbodwin.github.io/flair/index.html
-BugReports: https://github.com/kbodwin/flair/issues
+URL: https://github.com/r-for-educators/flair,
+    https://r-for-educators.github.io/flair/index.html
+BugReports: https://github.com/r-for-educators/flair/issues
 Imports:
     dplyr,
     ggplot2,
