@@ -33,7 +33,7 @@ mask_rx.decorated = function(x, pattern,
                                ...) {
   x %>%
     modify_sources(
-      mash_rx,
+      mask_rx,
       pattern = pattern,
       before = before,
       after = after,
