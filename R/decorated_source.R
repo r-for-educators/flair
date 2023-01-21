@@ -20,11 +20,18 @@ is_decorated_source <- function(x) {
 }
 
 modify_sources <- function(x, .f, ...) {
-  # The function to apply to `decorated_source` items
+  # `.f()` is the function we'll apply to any `decorated_source` items in `x`.
+  # `as_mapper()` lets us use the same syntax as `purrr::map()`, i.e. function
+  # names, anonymous functions, `~ .x` style, etc. The `purrr::partial()` call
+  # fills in the arguments of the function `.f` with any arguments in the `...`
+  # -- it's like we've updated the default values of the arguments of `.f`.
   .f <- purrr::partial(purrr::as_mapper(.f), ...)
 
-  # Ensure the `decorated_source` items retain their class post-processing
-  .modify <- purrr::compose(as_decorated_source, .f)
+  # Ensure the `decorated_source` items retain their class after we apply `.f()`
+  .f_decorated <- function(item) {
+    modified <- .f(item)
+    as_decorated_source(modified)
+  }
 
-  purrr::modify_if(x, is_decorated_source, .modify)
+  purrr::modify_if(x, is_decorated_source, .f_decorated)
 }
