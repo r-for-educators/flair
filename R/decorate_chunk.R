@@ -130,8 +130,7 @@ decorate_chunk <- function(chunk_name,
     # Check for flair = FALSE option... for now, this will just exclude flair chunks
     if (!is.null(my_opts$flair) && !my_opts$flair) {
 
-      placeholder <- list(NULL)
-      attr(placeholder, "class") = "decorated"
+      placeholder <- new_decorated(NULL)
 
       return(placeholder)
 
@@ -169,18 +168,7 @@ decorate_chunk <- function(chunk_name,
 
   } # live in editor or not
 
-  # convert knitted string to a list with sources separate from output
-  knitted <- knitted %>% src_to_list()
-
-  where_sources <-  map(knitted, ~attr(.x, "class")) == "source"
-
-  attr(knitted, "class") <- "decorated"
-
-  attr(knitted, "orig_chunk_text") <- my_code
-
-  attr(knitted, "chunk_name") <- chunk_name
-
-  return(knitted)
+  new_decorated(knitted, my_code, chunk_name)
 
 }
 
@@ -204,7 +192,7 @@ src_to_list <- function(knitted) {
   knitted[before_code + 1] <- stringr::str_trim(knitted[before_code + 1])
 
   knitted[before_code + 1] <- purrr::map(knitted[before_code + 1],
-                                         function(x) structure(list(src = x), class = "source"))
+                                         as_decorated_source)
 
   knitted <- knitted[-c(before_code, before_code + 2)]
 

@@ -50,38 +50,26 @@ decorate_code <- function(text, ...) {
   # Check for flair = FALSE option
   if (!is.null(my_opts$flair) && !my_opts$flair) {
 
-    placeholder <- list(NULL)
-    attr(placeholder, "class") = "decorated"
+    placeholder <- new_decorated(NULL)
 
     return(placeholder)
 
+  }
+
+  my_code_fenced <- paste0("```{r}\n", text, "\n```")
+
+  if (is_live) {
+
+    knitted <- knitr::knit(text = my_code_fenced,
+                           quiet = TRUE)
+
   } else {
 
-    my_code_fenced <- paste0("```{r}\n", text, "\n```")
-
-    if (is_live) {
-
-      knitted <- knitr::knit(text = my_code_fenced,
-                             quiet = TRUE)
-
-    } else {
-
-      knitted <- knitr::knit_child(text = my_code_fenced,
-                                   options = my_opts,
-                                   quiet = TRUE)
-    }
-
-    # convert knitted string to a list with sources separate from output
-    knitted <- knitted %>% src_to_list()
-
-    attr(knitted, "class") <- "decorated"
-
-    attr(knitted, "orig_code_text") <- text
-
-    attr(knitted, "chunk_name") <- NA
-
-    return(knitted)
-
+    knitted <- knitr::knit_child(text = my_code_fenced,
+                                 options = my_opts,
+                                 quiet = TRUE)
   }
+
+  new_decorated(knitted, text, NA_character_)
 
 }

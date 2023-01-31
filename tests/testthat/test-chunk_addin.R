@@ -77,6 +77,19 @@ sum(x)
 
 })
 
+test_that("add_flair_chunk() uses first unnamed argument for chunk label", {
+  # Technically, this is a valid chunk! o_O
+  flaired <- add_flair_chunk(
+'
+```{r, cars, , }
+sum(x)
+```
+')
+
+  lines <- stringr::str_split(flaired, "\n")[[1]]
+  expect_length(stringr::str_subset(lines, "_flair"), 1)
+})
+
 test_that("add_flair_chunk flips include = TRUE", {
   expect_equal(
     add_flair_chunk(

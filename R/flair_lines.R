@@ -54,7 +54,7 @@ flair_lines.default <- function(x, lines) {
 #' @export
 flair_lines.decorated <- function(x, lines) {
 
-  where_sources <-  map(x, ~attr(.x, "class")) == "source"
+  where_sources <- is_decorated_source(x)
 
   line_nums <-
     x[where_sources] %>%
@@ -69,14 +69,11 @@ flair_lines.decorated <- function(x, lines) {
 
   x[where_sources][to_flair] <- source_strings
 
-  x[where_sources][to_flair] <- purrr::map(x[where_sources][to_flair],
-                                           function(x) structure(list(src = x), class = "source"))
+  x[where_sources][to_flair] <- purrr::map(x[where_sources][to_flair], as_decorated_source)
 
   #x <- c(x, script)
 
-  attr(x, "class") <- "decorated"
-
-  return(x)
+  as_decorated(x)
 
 }
 

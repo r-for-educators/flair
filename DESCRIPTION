@@ -1,31 +1,29 @@
 Package: flair
 Title: Highlight, Annotate, and Format Your R Source Code
 Version: 0.0.2
-Authors@R: 
-    c(person(given = "Kelly",
-             family = "Bodwin",
-             role = c("aut", "cre"),
-             email = "kelly@bodwin.us"),
-      person(given = "Hunter",
-             family = "Glanz",
-             role = "aut"))
-Description: Facilitates easier formatting and highlighting of R
-    source code in a R Markdown-based presentation. The main goal of the
-    package is to allow users to preserve their code creation process
-    within code chunks, then to specify formatting details for the source
-    code, such as highlighting of particular syntactical elements.
+Authors@R: c(
+    person("Kelly", "Bodwin", , "kelly@bodwin.us", role = c("aut", "cre")),
+    person("Hunter", "Glanz", role = "aut")
+  )
+Description: Facilitates easier formatting and highlighting of R source
+    code in a R Markdown-based presentation. The main goal of the package
+    is to allow users to preserve their code creation process within code
+    chunks, then to specify formatting details for the source code, such
+    as highlighting of particular syntactical elements.
 License: MIT + file LICENSE
-URL: https://github.com/kbodwin/flair, https://kbodwin.github.io/flair/index.html
-BugReports: https://github.com/kbodwin/flair/issues
+URL: https://github.com/r-for-educators/flair,
+    https://r-for-educators.github.io/flair/index.html
+BugReports: https://github.com/r-for-educators/flair/issues
 Imports:
+    dplyr,
+    ggplot2,
     glue,
+    htmltools,
     knitr,
     magrittr,
     purrr,
     rmarkdown,
-    stringr,
-    ggplot2,
-    dplyr
+    stringr
 Suggests: 
     learnr,
     rstudioapi,
@@ -35,4 +33,4 @@ VignetteBuilder:
     knitr
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.2

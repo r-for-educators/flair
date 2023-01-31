@@ -13,6 +13,75 @@ decorated <- function(x) {
 
 }
 
+new_decorated <- function(knitted, code = NULL, label = NULL) {
+  # convert knitted string to a list with sources separate from output
+  knitted <- knitted %>% src_to_list()
+
+  structure(
+    knitted,
+    class = "decorated",
+    orig_code_text = code,
+    chunk_name = label
+  )
+}
+
+as_decorated <- function(x, ...) {
+  UseMethod("as_decorated", x)
+}
+
+#' @export
+as_decorated.default <- function(x, ...) {
+  stop("as_decorated() requires a list input and does not perform validation.")
+}
+
+#' @export
+as_decorated.list <- function(x, ...) {
+  structure(x, class = "decorated")
+}
+
+#' @export
+as_decorated.decorated <- function(x, ...) {
+  x
+}
+
+#' Method check
+#'
+#' @param x An object
+#'
+#' @return Whether the object is a \code{decorated} class object.
+#'
+#' @export
+is.decorated <- function(x) inherits(x, "decorated")
+
+
+#' When run interactively, a \code{decorated} object should preview the
+#' flaired source code in the viewer pane. (Only if in RStudio.)
+#'
+#' @param x A \code{decorated} object.
+#' @param ... Other \code{print} options
+#'
+#' @return None
+#'
+#' @export
+print.decorated <- function(x, ...) {
+
+  x_html <- htmltools::browsable(format(x))
+
+  print(x_html)
+
+  invisible(x)
+}
+
+#' @export
+format.decorated <- function(x, ...) {
+  x %>%
+    purrr::keep(is_decorated_source) %>%
+    map(prep_source, doc_type = "unknown") %>%
+    unlist() %>%
+    stringr::str_c(collapse = "<br />") %>%
+    htmltools::HTML()
+}
+
 #' S3 method for knitting a \code{decorated} object
 #'
 #' @param x A \code{decorated} object.
@@ -39,9 +108,7 @@ knit_print.decorated <- function(x, ...) {
 
   }
 
-  where_sources <- map(x, ~attr(.x, "class")) == "source"
-
-  x[where_sources] <- map(x[where_sources], function(src) prep_source(src, doc_type))
+  x <- modify_sources(x, prep_source, doc_type = doc_type)
 
   x <- stringr::str_c(unlist(x), collapse = "\n")
 
@@ -119,56 +186,3 @@ prep_source <- function(x, doc_type = "unknown") {
 
 }
 
-
-#' When run interactively, a \code{decorated} object should preview the
-#' flaired source code in the viewer pane. (Only if in RStudio.)
-#'
-#' @param x A \code{decorated} object.
-#' @param ... Other \code{print} options
-#'
-#' @return None
-#'
-#' @export
-print.decorated <- function(x, ...) {
-
-  editorIsOpen <- tryCatch({
-    rstudioapi::getSourceEditorContext()
-    TRUE
-  }, error = function(e) FALSE)
-
-  if (editorIsOpen) {
-
-    tempDir <- tempfile()
-    dir.create(tempDir)
-    htmlFile <- file.path(tempDir, "index.html")
-
-    where_sources <- map(x, ~attr(.x, "class")) == "source"
-
-    x <- x[where_sources]
-
-    x <- map(x, function(src) prep_source(src, doc_type = "unknown"))
-
-    x <- stringr::str_c(unlist(x), collapse = "</br>")
-
-    writeLines(x, htmlFile)
-
-    viewer <- getOption("viewer")
-    viewer(htmlFile)
-
-  } else {
-
-    return()
-
-  }
-
-}
-
-
-#' Method check
-#'
-#' @param x An object
-#'
-#' @return Whether the object is a \code{decorated} class object.
-#'
-#' @export
-is.decorated <- function(x) inherits(x, "decorated")

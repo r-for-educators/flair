@@ -40,11 +40,16 @@ add_flair_chunk  <- function(x) {
 
   chunk_params <- stringr::str_split(chunk_header, ", *")[[1]]
 
-  if (all(stringr::str_detect(chunk_params, "=")) || chunk_params == "") {
+  first_param_is_name <-
+    # if it doesn't include = and it has at least one non-space character
+    stringr::str_detect(chunk_params[[1]], "^[^= ]+$")
+
+  if (!first_param_is_name) {
     stop("Chunk must be named")
   }
 
-  chunk_name <- chunk_params[!stringr::str_detect(chunk_params, "=")]
+  # TODO: account for label="name" chunk option
+  chunk_name <- chunk_params[[1]]
 
   flair_chunk <- c(
     '',
