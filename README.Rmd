@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 [![Travis build status](https://travis-ci.org/kbodwin/flair.svg?branch=master)](https://travis-ci.org/kbodwin/flair)
 <!-- badges: end -->
 
-The goal of flair is to is to provide tools for formatting R code in knitted R Markdown files.
+flair provides tools to format R code in knitted R Markdown files.
 
 ## Installation
 
@@ -257,7 +257,7 @@ ggplot(iris, aes(x = Sepal.Length,
 
 ### Evaluating code and defining objects
 
-One nice feature the `decorate` function is that it evaluates the referenced code when it is run.  This means that you can define objects in your source code, and use them later in your analysis as you normally would:
+One nice feature of the `decorate` function is that it evaluates the referenced code when it is run.  This means that you can define objects in your source code, and use them later in your analysis as you normally would:
 
 
 ```{r}
@@ -269,7 +269,7 @@ foo + 5
 ```
 
 
-A word of caution: Make sure you define your objects in your code string, not outside the `decorate()` function!  For example, the following approach has two problems:
+A word of caution: Make sure you define your objects in your code string -- not outside the `decorate()` function!  For example, the following approach has two problems:
 
 1. `foo` contains the output object itself, rather than the result of the R code `mean(1:10)`, so  `foo + 5` throws an error.
 
